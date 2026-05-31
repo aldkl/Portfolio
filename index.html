@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Portfolio site">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Portfolio home">Portfolio</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__content">
+          <p class="eyebrow">Portfolio</p>
+          <h1 id="hero-title">콘텐츠를 추가할 준비가 된 포트폴리오 사이트</h1>
+          <p class="hero__copy">
+            이름, 소개, 프로젝트, 연락처를 입력하면 GitHub Pages에서 바로 공개할 수 있습니다.
+          </p>
+          <a class="button" href="#projects">프로젝트 영역 보기</a>
+        </div>
+      </section>
+
+      <section id="about" class="section" aria-labelledby="about-title">
+        <div class="section__inner">
+          <p class="section__label">About</p>
+          <h2 id="about-title">소개</h2>
+          <p>여기에 자기소개, 기술 스택, 작업 방향을 적으면 됩니다.</p>
+        </div>
+      </section>
+
+      <section id="projects" class="section section--muted" aria-labelledby="projects-title">
+        <div class="section__inner">
+          <p class="section__label">Projects</p>
+          <h2 id="projects-title">프로젝트</h2>
+          <div class="project-grid">
+            <article class="project">
+              <h3>프로젝트 이름</h3>
+              <p>문제, 역할, 사용 기술, 결과를 짧게 정리하는 영역입니다.</p>
+            </article>
+            <article class="project">
+              <h3>프로젝트 이름</h3>
+              <p>링크와 이미지가 준비되면 이 영역을 실제 사례로 교체합니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section" aria-labelledby="contact-title">
+        <div class="section__inner">
+          <p class="section__label">Contact</p>
+          <h2 id="contact-title">연락처</h2>
+          <p>이메일, GitHub, LinkedIn 같은 연락 경로를 추가하세요.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 Portfolio</span>
+    </footer>
+  </body>
+</html>
