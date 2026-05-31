@@ -24,3 +24,21 @@
 - Saved the recurring backup rule in Codex memory at `C:\Users\ADMIN\.codex\memories\portfolio-conversation-backup-system.md`.
 - Initialized the folder as a git repository and set the branch to `main`.
 - Created the initial commit: `4a1eef2 Set up GitHub Pages portfolio scaffold`.
+
+## Follow-up
+
+### User
+
+깃페이지를 몰라서 그런데 그냥 깃허브만 있으면 무료로 서버를 해주는거임? 그리고 공개로 해야해?
+
+### Assistant
+
+GitHub Pages는 GitHub 계정만 있으면 무료로 정적 웹사이트를 호스팅할 수 있고, 포트폴리오 같은 HTML/CSS/JS 정적 사이트에 적합하다고 설명했다. 무료 계정에서는 공개 저장소를 쓰는 것이 가장 단순하고 확실하며, 공개 저장소에는 비밀번호/API 키/개인 문서를 올리면 안 된다고 안내했다.
+
+### User
+
+https://github.com/aldkl/Portfolio.git 여기 만들었어.
+
+### Assistant
+
+원격 저장소를 연결하고 `main` 브랜치를 GitHub에 push하겠습니다. 작업 내용도 기존 백업 Markdown에 이어서 남기겠습니다.
