@@ -23,8 +23,8 @@
       <section class="detail-hero" aria-labelledby="project-title">
         <div class="section__inner detail-hero__inner">
           <div>
-            <a class="back-link" href="index.html#projects">프로젝트 목록</a>
-            <p class="project__meta" data-project-meta></p>
+            <a class="back-link" href="index.html#projects">작업 목록</a>
+            <ul class="tag-list tag-list--detail" data-project-tags></ul>
             <h1 id="project-title" data-project-title>Project</h1>
             <p class="hero__copy" data-project-summary></p>
             <div class="project-links" data-project-links></div>
@@ -37,8 +37,22 @@
         <div class="section__inner detail-layout">
           <div>
             <p class="section__label">Overview</p>
-            <h2 id="project-info-title">작업 정보</h2>
-            <p data-project-detail-text></p>
+            <h2 id="project-info-title">내가 한 작업</h2>
+            <p data-project-role></p>
+            <div class="learning-grid">
+              <section>
+                <h3>문제</h3>
+                <p data-project-problem></p>
+              </section>
+              <section>
+                <h3>해결</h3>
+                <p data-project-solution></p>
+              </section>
+              <section>
+                <h3>배운점</h3>
+                <p data-project-learned></p>
+              </section>
+            </div>
           </div>
           <dl class="detail-specs" data-project-specs></dl>
         </div>

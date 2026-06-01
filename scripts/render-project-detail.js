@@ -1,14 +1,14 @@
 (function () {
   const root = document.querySelector("[data-project-detail]");
-  const projects = window.PORTFOLIO_PROJECTS || [];
+  const items = window.PORTFOLIO_ITEMS || [];
 
   if (!root) {
     return;
   }
 
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get("project");
-  const project = projects.find((item) => item.slug === slug) || projects[0];
+  const slug = params.get("work") || params.get("project");
+  const item = items.find((entry) => entry.slug === slug) || items[0];
 
   const setText = (selector, text) => {
     const element = document.querySelector(selector);
@@ -23,22 +23,29 @@
     return element;
   };
 
-  document.title = `${project.title} | 이창준 Portfolio`;
-  setText("[data-project-meta]", [project.status, project.graphic, project.view, project.genre, project.engine].filter(Boolean).join(" · "));
-  setText("[data-project-title]", project.title);
-  setText("[data-project-summary]", project.summary);
-  setText("[data-project-detail-text]", project.detail);
+  document.title = `${item.title} | 이창준 Portfolio`;
+  setText("[data-project-title]", item.title);
+  setText("[data-project-summary]", item.summary);
+  setText("[data-project-role]", item.role);
+  setText("[data-project-problem]", item.problem);
+  setText("[data-project-solution]", item.solution);
+  setText("[data-project-learned]", item.learned);
+
+  const tags = document.querySelector("[data-project-tags]");
+  if (tags) {
+    tags.replaceChildren(...(item.tags || []).map((tag) => makeText("li", tag)));
+  }
 
   const image = document.querySelector("[data-project-image]");
   if (image) {
-    image.src = project.image;
-    image.alt = `${project.title} 대표 이미지`;
+    image.src = item.image;
+    image.alt = `${item.title} 대표 이미지`;
   }
 
   const links = document.querySelector("[data-project-links]");
   if (links) {
     links.replaceChildren();
-    (project.links || []).forEach((link) => {
+    (item.links || []).forEach((link) => {
       const anchor = document.createElement("a");
       anchor.href = link.url;
       anchor.textContent = link.label;
@@ -50,35 +57,33 @@
   if (specs) {
     specs.replaceChildren();
     [
-      ["개발여부", project.status],
-      ["그래픽", project.graphic],
-      ["시점", project.view],
-      ["장르", project.genre],
-      ["사용엔진", project.engine],
-      ["개발목적", project.purpose],
-      ["개발기간", project.period],
-      ["개발인원", project.team],
+      ["구분", item.category === "freelance" ? "외주 작업" : item.category === "study" ? "학교 과제 및 기타" : "프로젝트"],
+      ["개발여부", item.status],
+      ["개발목적", item.purpose],
+      ["개발기간", item.period],
+      ["개발인원", item.team],
     ]
       .filter(([, value]) => value)
       .forEach(([label, value]) => {
-        const item = document.createElement("div");
-        item.append(makeText("dt", label), makeText("dd", value));
-        specs.append(item);
+        const row = document.createElement("div");
+        row.append(makeText("dt", label), makeText("dd", value));
+        specs.append(row);
       });
   }
 
   const gallery = document.querySelector("[data-project-gallery]");
   if (gallery) {
-    gallery.replaceChildren();
-    const images = project.gallery && project.gallery.length > 0 ? project.gallery : [project.image];
-    images.forEach((src, index) => {
-      const figure = document.createElement("figure");
-      const galleryImage = document.createElement("img");
-      galleryImage.src = src;
-      galleryImage.alt = `${project.title} 사진 ${index + 1}`;
-      galleryImage.loading = index === 0 ? "eager" : "lazy";
-      figure.append(galleryImage);
-      gallery.append(figure);
-    });
+    const images = item.gallery && item.gallery.length > 0 ? item.gallery : [item.image];
+    gallery.replaceChildren(
+      ...images.map((src, index) => {
+        const figure = document.createElement("figure");
+        const galleryImage = document.createElement("img");
+        galleryImage.src = src;
+        galleryImage.alt = `${item.title} 사진 ${index + 1}`;
+        galleryImage.loading = index === 0 ? "eager" : "lazy";
+        figure.append(galleryImage);
+        return figure;
+      }),
+    );
   }
 })();
