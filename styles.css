@@ -323,14 +323,51 @@ h3 {
   margin-bottom: 18px;
 }
 
-.project__body a {
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: auto;
+  padding-top: 18px;
+}
+
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(23, 107, 135, 0.22);
+  border-radius: 6px;
+  background: rgba(23, 107, 135, 0.08);
   color: var(--accent);
   font-weight: 850;
 }
 
-.project--list {
-  background: #faf8f3;
+.project-details {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.project-details div {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.project-details dt,
+.project-details dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.project-details dt {
+  color: var(--warm);
+  font-weight: 850;
 }
 
 .showcase {

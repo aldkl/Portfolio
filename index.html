@@ -88,64 +88,13 @@
               <p class="section__label">Projects</p>
               <h2 id="projects-title">프로젝트</h2>
             </div>
-            <p>팀 프로젝트와 개인 작업 중 대표 항목을 먼저 옮겼습니다.</p>
+            <p>팀 프로젝트와 개인 작업을 Notion export 기준으로 정리했습니다.</p>
           </div>
 
-          <div class="project-grid">
-            <article class="project project--featured">
-              <img src="assets/portfolio/dear-my-prince.png" alt="Dear My Prince">
-              <div class="project__body">
-                <p class="project__meta">진행 중 · 3D · 사이드뷰 액션 플랫포머 · Unity URP</p>
-                <h3>Dear My Prince</h3>
-                <p>마우스 인터랙션을 활용해 플레이하는 청강문화산업대학교 졸업작품 팀 프로젝트입니다.</p>
-                <a href="https://youtu.be/9AStqEIan_w?si=XLIkz3b562lcHd6M">2학기 기말영상</a>
-              </div>
-            </article>
-
-            <article class="project">
-              <img src="assets/portfolio/colorxlight.png" alt="ColorXLight">
-              <div class="project__body">
-                <p class="project__meta">개발완료 · 2D · 플랫포머 · Unity</p>
-                <h3>ColorXLight</h3>
-                <p>맵에 퍼져있는 3개의 색상을 모아 다음 스테이지로 넘어가는 퍼즐 플랫포머입니다.</p>
-                <a href="https://github.com/aldkl/ColorXLight">GitHub</a>
-              </div>
-            </article>
-
-            <article class="project">
-              <img src="assets/portfolio/memoria.png" alt="Memoria">
-              <div class="project__body">
-                <p class="project__meta">개발완료 · 3D · 퍼즐 플랫포머 · Unity Built-in</p>
-                <h3>Memoria</h3>
-                <p>현실과 가상세계를 번갈아 보며 역경을 헤쳐나가는 게임잼 프로젝트입니다.</p>
-                <a href="https://github.com/aldkl/Memoria">GitHub</a>
-              </div>
-            </article>
-
-            <article class="project">
-              <img src="assets/portfolio/killerkim.png" alt="킬러킴">
-              <div class="project__body">
-                <p class="project__meta">개발완료 · 2D · 쿼터뷰 액션 · OpenGL</p>
-                <h3>킬러킴</h3>
-                <p>상대방의 총알을 흡수해 다시 쏘는 액션 게임입니다.</p>
-                <a href="https://github.com/aldkl/KillerKim">GitHub</a>
-              </div>
-            </article>
-
-            <article class="project project--list">
-              <div class="project__body">
-                <p class="project__meta">프로젝트 목록</p>
-                <h3>추가로 옮길 항목</h3>
-                <ul class="compact-list">
-                  <li>꽃의소녀</li>
-                  <li>요리조리</li>
-                  <li>Sea in the Seawer</li>
-                  <li>애니멀드래프트</li>
-                  <li>동방환상록 모작</li>
-                </ul>
-              </div>
-            </article>
-          </div>
+          <div class="project-grid" data-project-list></div>
+          <noscript>
+            <p>프로젝트 목록을 보려면 브라우저의 JavaScript를 켜주세요.</p>
+          </noscript>
         </div>
       </section>
 
@@ -201,5 +150,7 @@
     <footer class="footer">
       <span>© 2026 이창준 Portfolio</span>
     </footer>
+    <script src="scripts/portfolio-data.js"></script>
+    <script src="scripts/render-projects.js"></script>
   </body>
 </html>
