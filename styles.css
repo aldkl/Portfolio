@@ -418,22 +418,83 @@ h3 {
   align-items: center;
   min-height: 28px;
   padding: 0 9px;
-  border: 1px solid rgba(29, 32, 40, 0.12);
+  border: 1px solid rgba(29, 32, 40, 0.1);
   border-radius: 5px;
-  background: #e7f0f3;
-  color: #17495b;
+  background: #eceff3;
+  color: #4b5563;
   font-size: 14px;
   font-weight: 850;
 }
 
-.tag-list li:nth-child(3n + 2) {
-  background: #f1e7dc;
-  color: #8a4728;
+.tag--dimension {
+  background: #e5efff;
+  color: #2557a7;
 }
 
-.tag-list li:nth-child(3n) {
-  background: #e5ede3;
-  color: #2e633f;
+.tag-value--3d {
+  background: #efe8ff;
+  color: #6541a5;
+}
+
+.tag--view {
+  background: #e6f4f1;
+  color: #1d6b5f;
+}
+
+.tag-value--vr {
+  background: #dcf3ff;
+  color: #176182;
+}
+
+.tag--genre {
+  background: #fff0df;
+  color: #9a4e20;
+}
+
+.tag--engine {
+  background: #edf0ff;
+  color: #394a9c;
+}
+
+.tag-value--unity {
+  background: #e8edf4;
+  color: #354052;
+}
+
+.tag-value--unreal {
+  background: #e8e8ee;
+  color: #2f3341;
+}
+
+.tag-value--opengl {
+  background: #edf7ff;
+  color: #2c5f93;
+}
+
+.tag--tech {
+  background: #eaf5e6;
+  color: #3f6d2d;
+}
+
+.tag-value--shader {
+  background: #f3eaf8;
+  color: #74408a;
+}
+
+.tag-value--lighting {
+  background: #fff6d9;
+  color: #856114;
+}
+
+.tag-value--vfx {
+  background: #ffe9ef;
+  color: #9a3653;
+}
+
+.tag-value--tool,
+.tag-value--editor {
+  background: #e8f3ff;
+  color: #285f91;
 }
 
 .tag-list--detail {

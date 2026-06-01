@@ -18,7 +18,9 @@
     const tagList = document.createElement("ul");
     tagList.className = "tag-list";
     (tags || []).forEach((tag) => {
-      tagList.append(makeText("li", "", tag));
+      const tagItem = makeText("li", window.PORTFOLIO_TAGS.getClassName(tag), tag);
+      tagItem.dataset.tagGroup = tagItem.className.split(" ")[0].replace("tag--", "");
+      tagList.append(tagItem);
     });
     return tagList;
   };

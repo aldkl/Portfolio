@@ -23,6 +23,13 @@
     return element;
   };
 
+  const makeTag = (tag) => {
+    const element = makeText("li", tag);
+    element.className = window.PORTFOLIO_TAGS.getClassName(tag);
+    element.dataset.tagGroup = element.className.split(" ")[0].replace("tag--", "");
+    return element;
+  };
+
   document.title = `${item.title} | 이창준 Portfolio`;
   setText("[data-project-title]", item.title);
   setText("[data-project-summary]", item.summary);
@@ -33,7 +40,7 @@
 
   const tags = document.querySelector("[data-project-tags]");
   if (tags) {
-    tags.replaceChildren(...(item.tags || []).map((tag) => makeText("li", tag)));
+    tags.replaceChildren(...(item.tags || []).map(makeTag));
   }
 
   const image = document.querySelector("[data-project-image]");
