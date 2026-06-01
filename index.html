@@ -3,68 +3,203 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Portfolio site">
-    <title>Portfolio</title>
+    <meta
+      name="description"
+      content="프로그래밍, 쉐이더, 이펙트, 모델링, 애니메이션 작업을 다루는 이창준 포트폴리오"
+    >
+    <title>이창준 Portfolio</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="Portfolio home">Portfolio</a>
+      <a class="brand" href="#top" aria-label="이창준 포트폴리오 홈">이창준</a>
       <nav class="nav" aria-label="Primary navigation">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+        <a href="#about">소개</a>
+        <a href="#projects">프로젝트</a>
+        <a href="#freelance">외주</a>
+        <a href="#studies">연구/과제</a>
+        <a href="#contact">연락처</a>
       </nav>
     </header>
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__media">
+          <img src="assets/portfolio/dear-my-prince.png" alt="Dear My Prince 작업 이미지">
+        </div>
         <div class="hero__content">
-          <p class="eyebrow">Portfolio</p>
-          <h1 id="hero-title">콘텐츠를 추가할 준비가 된 포트폴리오 사이트</h1>
+          <p class="eyebrow">Game Developer Portfolio</p>
+          <h1 id="hero-title">프로그래밍부터 쉐이더, 이펙트, 애니메이션까지 직접 실험하는 개발자</h1>
           <p class="hero__copy">
-            이름, 소개, 프로젝트, 연락처를 입력하면 GitHub Pages에서 바로 공개할 수 있습니다.
+            게임 개발의 여러 파트에 흥미를 가지고 공부하며, 타 파트와의 소통을 바탕으로
+            팀 프로젝트와 개인 작업을 이어가고 있습니다.
           </p>
-          <a class="button" href="#projects">프로젝트 영역 보기</a>
+          <div class="hero__actions">
+            <a class="button" href="#projects">프로젝트 보기</a>
+            <a class="button button--ghost" href="https://github.com/aldkl">GitHub</a>
+          </div>
         </div>
       </section>
 
-      <section id="about" class="section" aria-labelledby="about-title">
-        <div class="section__inner">
-          <p class="section__label">About</p>
-          <h2 id="about-title">소개</h2>
-          <p>여기에 자기소개, 기술 스택, 작업 방향을 적으면 됩니다.</p>
+      <section id="about" class="section section--intro" aria-labelledby="about-title">
+        <div class="section__inner intro-grid">
+          <div>
+            <p class="section__label">About</p>
+            <h2 id="about-title">안녕하세요. 이창준입니다.</h2>
+            <p>
+              저는 여러 분야에 흥미를 가지고, 흥미에서 그치지 않고 실천하는 개발자입니다.
+              프로그래밍, 쉐이더, 이펙트, 모델링, 애니메이션, 컨셉 기획 등 다양한 파트를
+              공부하며 프로젝트를 만들어 왔습니다.
+            </p>
+          </div>
+          <div class="contact-panel" id="contact">
+            <span>Contact</span>
+            <a href="mailto:wns0134@gmail.com">wns0134@gmail.com</a>
+            <a href="https://github.com/aldkl">github.com/aldkl</a>
+          </div>
         </div>
       </section>
 
-      <section id="projects" class="section section--muted" aria-labelledby="projects-title">
+      <section class="section section--muted" aria-labelledby="history-title">
         <div class="section__inner">
-          <p class="section__label">Projects</p>
-          <h2 id="projects-title">프로젝트</h2>
+          <p class="section__label">History</p>
+          <h2 id="history-title">외부 이력</h2>
+          <ul class="timeline">
+            <li>2018 한국게임과학고등학교 학교내 게임제작대회 금상</li>
+            <li>2019 전라북도기능경기대회 금상</li>
+            <li>2019 전국기능경기대회 참가</li>
+            <li>2019 전북기능성게임제작대회 장려상</li>
+            <li>2020 제 19회 앱잼 장려상</li>
+            <li>2020 대한민국 청소년 게임잼 참가</li>
+            <li>2021 청강문화산업대학교 긴긴게임잼 참가</li>
+            <li>2021 청강문화산업대학교 AR/VR 페스티벌 참가</li>
+            <li>2024 청강문화산업대학교 AR/VR 페스티벌 참가</li>
+            <li>2024 청강문화산업대학교 학기프로젝트 참가</li>
+            <li>2025 청강문화산업대학교 졸업작품 크로니클 참가</li>
+            <li>2025 청강문화산업대학교 CGC 발표</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="projects" class="section" aria-labelledby="projects-title">
+        <div class="section__inner">
+          <div class="section-heading">
+            <div>
+              <p class="section__label">Projects</p>
+              <h2 id="projects-title">프로젝트</h2>
+            </div>
+            <p>팀 프로젝트와 개인 작업 중 대표 항목을 먼저 옮겼습니다.</p>
+          </div>
+
           <div class="project-grid">
-            <article class="project">
-              <h3>프로젝트 이름</h3>
-              <p>문제, 역할, 사용 기술, 결과를 짧게 정리하는 영역입니다.</p>
+            <article class="project project--featured">
+              <img src="assets/portfolio/dear-my-prince.png" alt="Dear My Prince">
+              <div class="project__body">
+                <p class="project__meta">진행 중 · 3D · 사이드뷰 액션 플랫포머 · Unity URP</p>
+                <h3>Dear My Prince</h3>
+                <p>마우스 인터랙션을 활용해 플레이하는 청강문화산업대학교 졸업작품 팀 프로젝트입니다.</p>
+                <a href="https://youtu.be/9AStqEIan_w?si=XLIkz3b562lcHd6M">2학기 기말영상</a>
+              </div>
             </article>
+
             <article class="project">
-              <h3>프로젝트 이름</h3>
-              <p>링크와 이미지가 준비되면 이 영역을 실제 사례로 교체합니다.</p>
+              <img src="assets/portfolio/colorxlight.png" alt="ColorXLight">
+              <div class="project__body">
+                <p class="project__meta">개발완료 · 2D · 플랫포머 · Unity</p>
+                <h3>ColorXLight</h3>
+                <p>맵에 퍼져있는 3개의 색상을 모아 다음 스테이지로 넘어가는 퍼즐 플랫포머입니다.</p>
+                <a href="https://github.com/aldkl/ColorXLight">GitHub</a>
+              </div>
+            </article>
+
+            <article class="project">
+              <img src="assets/portfolio/memoria.png" alt="Memoria">
+              <div class="project__body">
+                <p class="project__meta">개발완료 · 3D · 퍼즐 플랫포머 · Unity Built-in</p>
+                <h3>Memoria</h3>
+                <p>현실과 가상세계를 번갈아 보며 역경을 헤쳐나가는 게임잼 프로젝트입니다.</p>
+                <a href="https://github.com/aldkl/Memoria">GitHub</a>
+              </div>
+            </article>
+
+            <article class="project">
+              <img src="assets/portfolio/killerkim.png" alt="킬러킴">
+              <div class="project__body">
+                <p class="project__meta">개발완료 · 2D · 쿼터뷰 액션 · OpenGL</p>
+                <h3>킬러킴</h3>
+                <p>상대방의 총알을 흡수해 다시 쏘는 액션 게임입니다.</p>
+                <a href="https://github.com/aldkl/KillerKim">GitHub</a>
+              </div>
+            </article>
+
+            <article class="project project--list">
+              <div class="project__body">
+                <p class="project__meta">프로젝트 목록</p>
+                <h3>추가로 옮길 항목</h3>
+                <ul class="compact-list">
+                  <li>꽃의소녀</li>
+                  <li>요리조리</li>
+                  <li>Sea in the Seawer</li>
+                  <li>애니멀드래프트</li>
+                  <li>동방환상록 모작</li>
+                </ul>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="contact" class="section" aria-labelledby="contact-title">
-        <div class="section__inner">
-          <p class="section__label">Contact</p>
-          <h2 id="contact-title">연락처</h2>
-          <p>이메일, GitHub, LinkedIn 같은 연락 경로를 추가하세요.</p>
+      <section id="freelance" class="section section--muted" aria-labelledby="freelance-title">
+        <div class="section__inner split-section">
+          <div>
+            <p class="section__label">Freelance</p>
+            <h2 id="freelance-title">외주 작업 정리</h2>
+            <p>
+              크몽에서 진행한 VRC, 전시, 라이팅 관련 외주 작업입니다.
+              1차로 캡스톤 Lighting 대표 이미지를 옮겼습니다.
+            </p>
+            <ul class="compact-list">
+              <li>캡스톤Lighting</li>
+              <li>장애인 기구 전시장</li>
+              <li>타비분투</li>
+              <li>ET BordRoom</li>
+              <li>Built-in URP로 변경후 라이팅 작업</li>
+            </ul>
+          </div>
+          <figure class="showcase">
+            <img src="assets/portfolio/capstone-lighting.png" alt="캡스톤Lighting 작업 이미지">
+            <figcaption>VRC 맵 최적화, 라이팅, 머티리얼, 베이킹 작업</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="studies" class="section" aria-labelledby="studies-title">
+        <div class="section__inner split-section split-section--reverse">
+          <figure class="showcase">
+            <img src="assets/portfolio/watercolor-shader.png" alt="수채화 쉐이더 작업 이미지">
+            <figcaption>쉐이더, 그래픽 엔진, 이펙트 관련 연구와 과제</figcaption>
+          </figure>
+          <div>
+            <p class="section__label">Studies</p>
+            <h2 id="studies-title">학교 과제 및 기타</h2>
+            <ul class="compact-list">
+              <li>게임그래픽엔진기초</li>
+              <li>게임이펙트제작</li>
+              <li>게임그래픽엔진활용</li>
+              <li>게임그래픽엔진심화</li>
+              <li>수채화 쉐이더 작업</li>
+              <li>메테리얼 파라미터 설정 자동화 툴</li>
+              <li>구름 그림자 및 숲 그림자 쉐이더</li>
+              <li>바닥 랜덤타일링 쉐이더</li>
+              <li>물 쉐이더에 form 파트 추가</li>
+            </ul>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <span>© 2026 Portfolio</span>
+      <span>© 2026 이창준 Portfolio</span>
     </footer>
   </body>
 </html>
