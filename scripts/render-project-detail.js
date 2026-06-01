@@ -30,6 +30,64 @@
     return element;
   };
 
+  const makeParagraph = (text) => {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = text;
+    return paragraph;
+  };
+
+  const makeFigure = (block, itemTitle) => {
+    const figure = document.createElement("figure");
+    figure.className = "content-figure";
+
+    const image = document.createElement("img");
+    image.src = block.src;
+    image.alt = block.caption || `${itemTitle} 상세 이미지`;
+    image.loading = "lazy";
+    figure.append(image);
+
+    if (block.caption) {
+      const caption = document.createElement("figcaption");
+      caption.textContent = block.caption;
+      figure.append(caption);
+    }
+
+    return figure;
+  };
+
+  const renderContentBlocks = (container, item) => {
+    const blocks = (window.PORTFOLIO_CONTENT || {})[item.slug];
+    container.replaceChildren();
+
+    if (blocks && blocks.length > 0) {
+      container.className = "content-flow";
+      blocks.forEach((block) => {
+        if (block.type === "h3") {
+          container.append(makeText("h3", block.text));
+        } else if (block.type === "image") {
+          container.append(makeFigure(block, item.title));
+        } else {
+          container.append(makeParagraph(block.text));
+        }
+      });
+      return;
+    }
+
+    container.className = "gallery-grid";
+    const images = item.gallery && item.gallery.length > 0 ? item.gallery : [item.image];
+    container.replaceChildren(
+      ...images.map((src, index) => {
+        const figure = document.createElement("figure");
+        const galleryImage = document.createElement("img");
+        galleryImage.src = src;
+        galleryImage.alt = `${item.title} 사진 ${index + 1}`;
+        galleryImage.loading = index === 0 ? "eager" : "lazy";
+        figure.append(galleryImage);
+        return figure;
+      }),
+    );
+  };
+
   document.title = `${item.title} | 이창준 Portfolio`;
   setText("[data-project-title]", item.title);
   setText("[data-project-summary]", item.summary);
@@ -79,19 +137,8 @@
       });
   }
 
-  const gallery = document.querySelector("[data-project-gallery]");
-  if (gallery) {
-    const images = item.gallery && item.gallery.length > 0 ? item.gallery : [item.image];
-    gallery.replaceChildren(
-      ...images.map((src, index) => {
-        const figure = document.createElement("figure");
-        const galleryImage = document.createElement("img");
-        galleryImage.src = src;
-        galleryImage.alt = `${item.title} 사진 ${index + 1}`;
-        galleryImage.loading = index === 0 ? "eager" : "lazy";
-        figure.append(galleryImage);
-        return figure;
-      }),
-    );
+  const content = document.querySelector("[data-project-content]");
+  if (content) {
+    renderContentBlocks(content, item);
   }
 })();

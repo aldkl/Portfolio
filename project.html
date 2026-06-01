@@ -37,8 +37,7 @@
         <div class="section__inner detail-layout">
           <div>
             <p class="section__label">Overview</p>
-            <h2 id="project-info-title">내가 한 작업</h2>
-            <p data-project-role></p>
+            <h2 id="project-info-title">문제 해결</h2>
             <div class="learning-grid">
               <section>
                 <h3>문제</h3>
@@ -53,20 +52,22 @@
                 <p data-project-learned></p>
               </section>
             </div>
+            <h2 class="subsection-title">내가 한 작업</h2>
+            <p data-project-role></p>
           </div>
           <dl class="detail-specs" data-project-specs></dl>
         </div>
       </section>
 
-      <section class="section section--muted" aria-labelledby="gallery-title">
+      <section class="section section--muted" aria-labelledby="content-title">
         <div class="section__inner">
           <div class="section-heading">
             <div>
-              <p class="section__label">Gallery</p>
-              <h2 id="gallery-title">사진</h2>
+              <p class="section__label">Details</p>
+              <h2 id="content-title" data-detail-content-title>상세 작업 내용</h2>
             </div>
           </div>
-          <div class="gallery-grid" data-project-gallery></div>
+          <div data-project-content></div>
         </div>
       </section>
     </main>
@@ -75,6 +76,7 @@
       <span>© 2026 이창준 Portfolio · wns0134@gmail.com</span>
     </footer>
     <script src="scripts/portfolio-data.js"></script>
+    <script src="scripts/work-content.js"></script>
     <script src="scripts/tag-utils.js"></script>
     <script src="scripts/render-project-detail.js"></script>
   </body>
