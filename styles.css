@@ -143,6 +143,15 @@ h1 {
   line-height: 1.05;
 }
 
+.hero-title {
+  max-width: 680px;
+  word-break: keep-all;
+}
+
+.hero-title span {
+  display: block;
+}
+
 h2 {
   margin-bottom: 18px;
   font-size: clamp(30px, 4vw, 48px);
