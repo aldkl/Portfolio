@@ -2,6 +2,8 @@
 
 GitHub Pages로 배포할 정적 포트폴리오 사이트입니다.
 
+사이트 주소: https://aldkl.github.io/Portfolio/
+
 ## GitHub Pages 설정
 
 1. GitHub에 새 저장소를 만듭니다.
