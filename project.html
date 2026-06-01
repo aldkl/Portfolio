@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="이창준 포트폴리오 프로젝트 상세">
+    <title>Project | 이창준 Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html#top" aria-label="이창준 포트폴리오 홈">이창준</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="index.html#about">소개</a>
+        <a href="index.html#projects">프로젝트</a>
+        <a href="index.html#freelance">외주</a>
+        <a href="index.html#studies">연구/과제</a>
+        <a href="index.html#contact">연락처</a>
+      </nav>
+    </header>
+
+    <main class="detail-page" data-project-detail>
+      <section class="detail-hero" aria-labelledby="project-title">
+        <div class="section__inner detail-hero__inner">
+          <div>
+            <a class="back-link" href="index.html#projects">프로젝트 목록</a>
+            <p class="project__meta" data-project-meta></p>
+            <h1 id="project-title" data-project-title>Project</h1>
+            <p class="hero__copy" data-project-summary></p>
+            <div class="project-links" data-project-links></div>
+          </div>
+          <img class="detail-hero__image" data-project-image alt="">
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="project-info-title">
+        <div class="section__inner detail-layout">
+          <div>
+            <p class="section__label">Overview</p>
+            <h2 id="project-info-title">작업 정보</h2>
+            <p data-project-detail-text></p>
+          </div>
+          <dl class="detail-specs" data-project-specs></dl>
+        </div>
+      </section>
+
+      <section class="section section--muted" aria-labelledby="gallery-title">
+        <div class="section__inner">
+          <div class="section-heading">
+            <div>
+              <p class="section__label">Gallery</p>
+              <h2 id="gallery-title">사진</h2>
+            </div>
+          </div>
+          <div class="gallery-grid" data-project-gallery></div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="footer">
+      <span>© 2026 이창준 Portfolio · wns0134@gmail.com</span>
+    </footer>
+    <script src="scripts/portfolio-data.js"></script>
+    <script src="scripts/render-project-detail.js"></script>
+  </body>
+</html>

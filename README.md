@@ -14,6 +14,7 @@ GitHub Pages로 배포할 정적 포트폴리오 사이트입니다.
 
 배포 후 포트폴리오의 기본 문구와 섹션 구조는 `index.html`, 스타일은 `styles.css`에서 수정합니다.
 
-프로젝트 카드 정보는 `scripts/portfolio-data.js`에서 수정합니다. 새 프로젝트를 추가할 때는
-`window.PORTFOLIO_PROJECTS` 배열에 객체를 하나 더 추가하고, 대표 이미지는 `assets/portfolio/`에
-넣은 뒤 `image` 경로만 연결하면 됩니다.
+프로젝트 카드와 상세 페이지 정보는 `scripts/portfolio-data.js`에서 수정합니다. 새 프로젝트를 추가할 때는
+`window.PORTFOLIO_PROJECTS` 배열에 객체를 하나 더 추가하고, 대표 이미지는 `assets/portfolio/`에 넣은 뒤
+`image` 경로를 연결하면 됩니다. 상세 페이지에서 보여줄 사진은 `assets/projects/프로젝트-slug/`에 넣고
+`gallery` 배열에 경로를 추가합니다.

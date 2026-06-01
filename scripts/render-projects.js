@@ -60,10 +60,16 @@
     const article = document.createElement("article");
     article.className = project.featured ? "project project--featured" : "project";
 
+    const detailUrl = `project.html?project=${encodeURIComponent(project.slug)}`;
+    const imageLink = document.createElement("a");
+    imageLink.className = "project__image-link";
+    imageLink.href = detailUrl;
+
     const image = document.createElement("img");
     image.src = project.image;
     image.alt = `${project.title} 대표 이미지`;
     image.loading = project.featured ? "eager" : "lazy";
+    imageLink.append(image);
 
     const body = document.createElement("div");
     body.className = "project__body";
@@ -86,11 +92,17 @@
       body.append(detailList);
     }
 
+    const detailLink = document.createElement("a");
+    detailLink.className = "project-detail-link";
+    detailLink.href = detailUrl;
+    detailLink.textContent = "자세히 보기";
+    body.append(detailLink);
+
     if (links) {
       body.append(links);
     }
 
-    article.append(image, body);
+    article.append(imageLink, body);
     root.append(article);
   });
 })();

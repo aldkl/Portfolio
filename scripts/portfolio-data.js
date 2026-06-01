@@ -1,6 +1,8 @@
 // 프로젝트를 추가하거나 수정할 때는 이 배열만 편집하면 됩니다.
+// slug는 project.html?project=slug 형태의 상세 페이지 주소로 쓰입니다.
 window.PORTFOLIO_PROJECTS = [
   {
+    slug: "dear-my-prince",
     title: "Dear My Prince",
     status: "진행 중",
     graphic: "3D",
@@ -11,20 +13,17 @@ window.PORTFOLIO_PROJECTS = [
     period: "2025.03.02 ~ 2025.11.20",
     team: "14명",
     summary: "마우스 인터랙션을 활용해 플레이하는 액션 게임입니다.",
+    detail: "캐릭터 애니메이션, 쉐이더, 기능 코드, FMOD, 작업일지 등을 정리하고 있는 최신 팀 프로젝트입니다.",
     image: "assets/portfolio/dear-my-prince.png",
     featured: true,
+    gallery: ["assets/projects/dear-my-prince/01.png"],
     links: [
-      {
-        label: "2학기 기말영상",
-        url: "https://youtu.be/9AStqEIan_w?si=XLIkz3b562lcHd6M",
-      },
-      {
-        label: "1학기 기말영상",
-        url: "https://youtu.be/IhRAN0lDSNE?si=25B9kBBgVb5_esF1",
-      },
+      { label: "2학기 기말영상", url: "https://youtu.be/9AStqEIan_w?si=XLIkz3b562lcHd6M" },
+      { label: "1학기 기말영상", url: "https://youtu.be/IhRAN0lDSNE?si=25B9kBBgVb5_esF1" },
     ],
   },
   {
+    slug: "flower-girl",
     title: "꽃의소녀",
     status: "개발완료",
     graphic: "3D",
@@ -35,15 +34,13 @@ window.PORTFOLIO_PROJECTS = [
     period: "14주",
     team: "14명",
     summary: "쓰레기를 청소하고 숲을 정화하며 치유와 뿌듯함을 전달하는 게임입니다.",
+    detail: "PD로 참여하며 흡입을 이용한 청소 게임의 핵심 경험을 정리했고, 제한된 팀 리소스 안에서 콘텐츠 범위와 재미를 조율했습니다.",
     image: "assets/portfolio/flower-girl.png",
-    links: [
-      {
-        label: "영상",
-        url: "https://youtu.be/WgAmVcwEapI?si=LitLsF7gJzd4_u6z",
-      },
-    ],
+    gallery: ["assets/projects/flower-girl/01.png"],
+    links: [{ label: "영상", url: "https://youtu.be/WgAmVcwEapI?si=LitLsF7gJzd4_u6z" }],
   },
   {
+    slug: "yorijori",
     title: "요리조리",
     status: "개발완료",
     graphic: "3D",
@@ -54,19 +51,16 @@ window.PORTFOLIO_PROJECTS = [
     period: "2024.07.01 ~ 2024.08.23",
     team: "13명",
     summary: "플레이어를 방해하는 기믹 재료를 처리하며 요리를 완성하는 VR 게임입니다.",
+    detail: "많은 재료와 레시피 변경 가능성을 고려해 리스트 기반 구조로 요리 데이터를 관리했고, Unity XR 기능으로 VR 기기 연동을 구현했습니다.",
     image: "assets/portfolio/yorijori.png",
+    gallery: ["assets/projects/yorijori/01.png"],
     links: [
-      {
-        label: "영상",
-        url: "https://youtu.be/h7lnSOAWpxM?si=_vz6FD4Aeqfo89GA",
-      },
-      {
-        label: "GitHub",
-        url: "https://github.com/aldkl/Yorijori",
-      },
+      { label: "영상", url: "https://youtu.be/h7lnSOAWpxM?si=_vz6FD4Aeqfo89GA" },
+      { label: "GitHub", url: "https://github.com/aldkl/Yorijori" },
     ],
   },
   {
+    slug: "memoria",
     title: "Memoria",
     status: "개발완료",
     graphic: "3D",
@@ -77,19 +71,21 @@ window.PORTFOLIO_PROJECTS = [
     period: "2021.05.02 ~ 2021.07.21",
     team: "7명",
     summary: "현실과 가상세계를 번갈아 보며 역경을 헤쳐나가는 플랫포머 게임입니다.",
+    detail: "캐릭터 상태에 따라 애니메이션과 배경 텍스처를 전환해 현실/가상세계가 달라지는 규칙을 구현했습니다.",
     image: "assets/portfolio/memoria.png",
+    gallery: [
+      "assets/projects/memoria/01.png",
+      "assets/projects/memoria/02.png",
+      "assets/projects/memoria/03.png",
+      "assets/projects/memoria/04.png",
+    ],
     links: [
-      {
-        label: "GitHub",
-        url: "https://github.com/aldkl/Memoria",
-      },
-      {
-        label: "Build",
-        url: "https://drive.google.com/file/d/153zfTm-pG8CxlE_F4easZCBmE6oneljm/view?usp=sharing",
-      },
+      { label: "GitHub", url: "https://github.com/aldkl/Memoria" },
+      { label: "Build", url: "https://drive.google.com/file/d/153zfTm-pG8CxlE_F4easZCBmE6oneljm/view?usp=sharing" },
     ],
   },
   {
+    slug: "colorxlight",
     title: "ColorXLight",
     status: "개발완료",
     graphic: "2D",
@@ -100,19 +96,21 @@ window.PORTFOLIO_PROJECTS = [
     period: "2021.05.11 ~ 2021.06.07",
     team: "4명",
     summary: "맵에 퍼져있는 3개의 색상을 모아 다음 스테이지로 넘어가는 퍼즐 플랫포머입니다.",
+    detail: "상호작용 오브젝트를 Interactable 클래스로 분리하고, 램프와 문 퍼즐을 상속 구조로 구현했습니다.",
     image: "assets/portfolio/colorxlight.png",
+    gallery: [
+      "assets/projects/colorxlight/01.png",
+      "assets/projects/colorxlight/02.png",
+      "assets/projects/colorxlight/03.png",
+      "assets/projects/colorxlight/04.png",
+    ],
     links: [
-      {
-        label: "GitHub",
-        url: "https://github.com/aldkl/ColorXLight",
-      },
-      {
-        label: "Build",
-        url: "https://drive.google.com/file/d/1S_sWPBKH97D-rzHc9WcwcBzyM-cQ1W7e/view?usp=drive_link",
-      },
+      { label: "GitHub", url: "https://github.com/aldkl/ColorXLight" },
+      { label: "Build", url: "https://drive.google.com/file/d/1S_sWPBKH97D-rzHc9WcwcBzyM-cQ1W7e/view?usp=drive_link" },
     ],
   },
   {
+    slug: "sea-in-the-seawer",
     title: "Sea in the Seawer",
     status: "개발완료",
     graphic: "2D",
@@ -123,15 +121,17 @@ window.PORTFOLIO_PROJECTS = [
     period: "",
     team: "",
     summary: "어둠 속에서 소리를 잘 듣고 앞을 헤쳐나가는 어드벤처 게임입니다.",
+    detail: "시야가 제한된 상황에서 소리를 단서로 진행하는 게임잼 프로젝트입니다.",
     image: "assets/portfolio/sea-in-the-seawer.png",
-    links: [
-      {
-        label: "Build",
-        url: "https://drive.google.com/file/d/1pBsXLx-jSrCeH_TQv7rbWDsO9N_kxe36/view?usp=drive_link",
-      },
+    gallery: [
+      "assets/projects/sea-in-the-seawer/01.png",
+      "assets/projects/sea-in-the-seawer/02.png",
+      "assets/projects/sea-in-the-seawer/03.png",
     ],
+    links: [{ label: "Build", url: "https://drive.google.com/file/d/1pBsXLx-jSrCeH_TQv7rbWDsO9N_kxe36/view?usp=drive_link" }],
   },
   {
+    slug: "animaldraft",
     title: "애니멀드래프트",
     status: "개발완료",
     graphic: "3D",
@@ -142,15 +142,17 @@ window.PORTFOLIO_PROJECTS = [
     period: "2019.09 ~ 2020.01",
     team: "3명",
     summary: "카트라이더처럼 만들어 보기 위해 제작한 레이싱 연습작입니다.",
+    detail: "레이싱 게임의 주행감과 코스 진행을 학습하기 위해 만든 고등학교 팀 프로젝트입니다.",
     image: "assets/portfolio/animaldraft.png",
-    links: [
-      {
-        label: "GitHub",
-        url: "https://github.com/aldkl/AnimalDraft",
-      },
+    gallery: [
+      "assets/projects/animaldraft/01.png",
+      "assets/projects/animaldraft/02.png",
+      "assets/projects/animaldraft/03.png",
     ],
+    links: [{ label: "GitHub", url: "https://github.com/aldkl/AnimalDraft" }],
   },
   {
+    slug: "touhou-remake",
     title: "동방환상록 모작",
     status: "개발완료",
     graphic: "2D",
@@ -161,15 +163,18 @@ window.PORTFOLIO_PROJECTS = [
     period: "2019.05",
     team: "프로그래머 1명",
     summary: "동방풍신록을 모작하며 UI, 로딩, 몬스터 움직임을 원작과 유사하게 구현한 슈팅 게임입니다.",
+    detail: "짧은 기간 안에 많은 움직임을 구현하기 위해 iTween을 활용했고, 미리 만든 경로를 몬스터 생성 이후 연결하는 방식으로 잡몹 페이즈를 구성했습니다.",
     image: "assets/portfolio/touhou-remake.png",
-    links: [
-      {
-        label: "Build",
-        url: "https://drive.google.com/file/d/1O79SPSuusA2G4p4VV6oJpO096U_5MYL2/view?usp=drive_link",
-      },
+    gallery: [
+      "assets/projects/touhou-remake/01.png",
+      "assets/projects/touhou-remake/02.png",
+      "assets/projects/touhou-remake/03.png",
+      "assets/projects/touhou-remake/04.png",
     ],
+    links: [{ label: "Build", url: "https://drive.google.com/file/d/1O79SPSuusA2G4p4VV6oJpO096U_5MYL2/view?usp=drive_link" }],
   },
   {
+    slug: "killerkim",
     title: "킬러킴",
     status: "개발완료",
     graphic: "2D",
@@ -180,16 +185,16 @@ window.PORTFOLIO_PROJECTS = [
     period: "2018.10 ~ 2019.01",
     team: "3명",
     summary: "상대방의 총알을 흡수해 다시 쏘는 액션 게임입니다.",
+    detail: "흡수와 반격을 핵심 규칙으로 둔 액션 게임이며, 고등학교 게임제작대회 참여작입니다.",
     image: "assets/portfolio/killerkim.png",
+    gallery: [
+      "assets/projects/killerkim/01.png",
+      "assets/projects/killerkim/02.png",
+      "assets/projects/killerkim/03.png",
+    ],
     links: [
-      {
-        label: "GitHub",
-        url: "https://github.com/aldkl/KillerKim",
-      },
-      {
-        label: "Build",
-        url: "https://drive.google.com/file/d/1_McME6j1biNXwxl6YqJtmKdVFBYNgzCr/view?usp=drive_link",
-      },
+      { label: "GitHub", url: "https://github.com/aldkl/KillerKim" },
+      { label: "Build", url: "https://drive.google.com/file/d/1_McME6j1biNXwxl6YqJtmKdVFBYNgzCr/view?usp=drive_link" },
     ],
   },
 ];
