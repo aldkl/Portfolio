@@ -426,73 +426,73 @@ h3 {
   font-weight: 850;
 }
 
-.tag--dimension {
+.tag-list li.tag--dimension {
   background: #e5efff;
   color: #2557a7;
 }
 
-.tag-value--3d {
+.tag-list li.tag-value--3d {
   background: #efe8ff;
   color: #6541a5;
 }
 
-.tag--view {
+.tag-list li.tag--view {
   background: #e6f4f1;
   color: #1d6b5f;
 }
 
-.tag-value--vr {
+.tag-list li.tag-value--vr {
   background: #dcf3ff;
   color: #176182;
 }
 
-.tag--genre {
+.tag-list li.tag--genre {
   background: #fff0df;
   color: #9a4e20;
 }
 
-.tag--engine {
+.tag-list li.tag--engine {
   background: #edf0ff;
   color: #394a9c;
 }
 
-.tag-value--unity {
+.tag-list li.tag-value--unity {
   background: #e8edf4;
   color: #354052;
 }
 
-.tag-value--unreal {
+.tag-list li.tag-value--unreal {
   background: #e8e8ee;
   color: #2f3341;
 }
 
-.tag-value--opengl {
+.tag-list li.tag-value--opengl {
   background: #edf7ff;
   color: #2c5f93;
 }
 
-.tag--tech {
+.tag-list li.tag--tech {
   background: #eaf5e6;
   color: #3f6d2d;
 }
 
-.tag-value--shader {
+.tag-list li.tag-value--shader {
   background: #f3eaf8;
   color: #74408a;
 }
 
-.tag-value--lighting {
+.tag-list li.tag-value--lighting {
   background: #fff6d9;
   color: #856114;
 }
 
-.tag-value--vfx {
+.tag-list li.tag-value--vfx {
   background: #ffe9ef;
   color: #9a3653;
 }
 
-.tag-value--tool,
-.tag-value--editor {
+.tag-list li.tag-value--tool,
+.tag-list li.tag-value--editor {
   background: #e8f3ff;
   color: #285f91;
 }
