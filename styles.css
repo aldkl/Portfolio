@@ -71,10 +71,6 @@ a {
   margin-left: auto;
 }
 
-.nav__about {
-  transform: translateY(3px);
-}
-
 .language-switcher {
   display: flex;
   align-items: center;
