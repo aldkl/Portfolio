@@ -1,61 +1,85 @@
 (function () {
   const supportedLanguages = ["ko", "en", "ja"];
-  const savedLanguage = localStorage.getItem("portfolio-language");
-  const browserLanguage = (navigator.language || "ko").slice(0, 2);
-  const initialLanguage = supportedLanguages.includes(savedLanguage)
-    ? savedLanguage
-    : supportedLanguages.includes(browserLanguage)
-      ? browserLanguage
-      : "ko";
+  const dictionaries = window.PORTFOLIO_LOCALES || {};
+  const originals = new WeakMap();
+  const originalAttributes = new WeakMap();
+  const originalDocumentTitle = document.title;
+  let currentLanguage = supportedLanguages.includes(localStorage.getItem("portfolio-language"))
+    ? localStorage.getItem("portfolio-language")
+    : "ko";
 
-  const setTranslationCookie = (language) => {
-    const value = language === "ko" ? "/ko/ko" : `/ko/${language}`;
-    const maxAge = language === "ko" ? 0 : 60 * 60 * 24 * 365;
-    document.cookie = `googtrans=${value};path=/;max-age=${maxAge};SameSite=Lax`;
-    document.cookie = `googtrans=${value};path=/;domain=${location.hostname};max-age=${maxAge};SameSite=Lax`;
+  const normalize = (value) => value.replace(/\s+/g, " ").trim();
+
+  const translatedValue = (source) => {
+    if (currentLanguage === "ko") return source;
+    const normalized = normalize(source);
+    const translated = dictionaries[currentLanguage] && dictionaries[currentLanguage][normalized];
+    if (!translated) return source;
+    const leading = source.match(/^\s*/)[0];
+    const trailing = source.match(/\s*$/)[0];
+    return `${leading}${translated}${trailing}`;
   };
 
-  const markCurrentLanguage = (language) => {
-    document.documentElement.lang = language;
-    document.querySelectorAll("[data-language]").forEach((button) => {
-      button.setAttribute("aria-pressed", String(button.dataset.language === language));
+  const shouldSkip = (node) => {
+    const parent = node.parentElement;
+    return !parent || parent.closest("script, style, .notranslate, [translate='no']");
+  };
+
+  const translateTextNode = (node) => {
+    if (shouldSkip(node) || !normalize(node.nodeValue)) return;
+    if (!originals.has(node)) originals.set(node, node.nodeValue);
+    node.nodeValue = translatedValue(originals.get(node));
+  };
+
+  const translateAttributes = (element) => {
+    if (element.closest(".notranslate, [translate='no']")) return;
+    const names = ["alt", "title", "aria-label", "content"];
+    if (!originalAttributes.has(element)) originalAttributes.set(element, {});
+    const stored = originalAttributes.get(element);
+    names.forEach((name) => {
+      if (!element.hasAttribute(name)) return;
+      if (!(name in stored)) stored[name] = element.getAttribute(name);
+      element.setAttribute(name, translatedValue(stored[name]));
     });
   };
 
-  markCurrentLanguage(initialLanguage);
-  if (initialLanguage !== "ko") {
-    setTranslationCookie(initialLanguage);
-  }
+  const translateTree = (root) => {
+    if (root.nodeType === Node.TEXT_NODE) {
+      translateTextNode(root);
+      return;
+    }
+    if (root.nodeType !== Node.ELEMENT_NODE) return;
+    translateAttributes(root);
+    root.querySelectorAll("*").forEach(translateAttributes);
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) translateTextNode(walker.currentNode);
+  };
+
+  const updateButtons = () => {
+    document.documentElement.lang = currentLanguage;
+    document.title = currentLanguage === "ko"
+      ? originalDocumentTitle
+      : originalDocumentTitle
+          .split(" | ")
+          .map((part) => (dictionaries[currentLanguage] && dictionaries[currentLanguage][part]) || part)
+          .join(" | ");
+    document.querySelectorAll("[data-language]").forEach((button) => {
+      const active = button.dataset.language === currentLanguage;
+      button.setAttribute("aria-pressed", String(active));
+      button.title = active ? "" : `Switch to ${button.textContent}`;
+    });
+  };
+
+  const applyLanguage = (language) => {
+    currentLanguage = supportedLanguages.includes(language) ? language : "ko";
+    localStorage.setItem("portfolio-language", currentLanguage);
+    translateTree(document.body);
+    updateButtons();
+  };
 
   document.querySelectorAll("[data-language]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const language = button.dataset.language;
-      if (!supportedLanguages.includes(language)) return;
-      localStorage.setItem("portfolio-language", language);
-      setTranslationCookie(language);
-      location.reload();
-    });
+    button.addEventListener("click", () => applyLanguage(button.dataset.language));
   });
 
-  const mount = document.createElement("div");
-  mount.id = "google_translate_element";
-  mount.setAttribute("aria-hidden", "true");
-  document.body.append(mount);
-
-  window.googleTranslateElementInit = function () {
-    if (!window.google || !window.google.translate) return;
-    new window.google.translate.TranslateElement(
-      {
-        pageLanguage: "ko",
-        includedLanguages: "ko,en,ja",
-        autoDisplay: false,
-      },
-      "google_translate_element",
-    );
-  };
-
-  const script = document.createElement("script");
-  script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-  script.async = true;
-  document.head.append(script);
+  applyLanguage(currentLanguage);
 })();
