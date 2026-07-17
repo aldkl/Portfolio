@@ -52,36 +52,32 @@
   };
 
   const makeProjectLink = (link) => {
-    const anchor = document.createElement("a");
     const videoId = getYouTubeVideoId(link.url);
-    anchor.href = link.url;
-    anchor.target = "_blank";
-    anchor.rel = "noopener noreferrer";
 
     if (!videoId) {
+      const anchor = document.createElement("a");
+      anchor.href = link.url;
+      anchor.target = "_blank";
+      anchor.rel = "noopener noreferrer";
       anchor.textContent = link.label;
       return anchor;
     }
 
-    anchor.className = "video-link-card";
-    anchor.setAttribute("aria-label", link.label);
+    const figure = document.createElement("figure");
+    figure.className = "video-embed-card";
 
-    const thumbnail = document.createElement("img");
-    thumbnail.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-    thumbnail.alt = link.label;
-    thumbnail.loading = "lazy";
+    const frame = document.createElement("iframe");
+    frame.src = `https://www.youtube-nocookie.com/embed/${videoId}`;
+    frame.title = link.label;
+    frame.loading = "lazy";
+    frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    frame.referrerPolicy = "strict-origin-when-cross-origin";
+    frame.allowFullscreen = true;
 
-    const playIcon = document.createElement("span");
-    playIcon.className = "video-link-card__play";
-    playIcon.setAttribute("aria-hidden", "true");
-    playIcon.textContent = "▶";
-
-    const title = document.createElement("span");
-    title.className = "video-link-card__title";
-    title.textContent = link.label;
-
-    anchor.append(thumbnail, playIcon, title);
-    return anchor;
+    const caption = document.createElement("figcaption");
+    caption.textContent = link.label;
+    figure.append(frame, caption);
+    return figure;
   };
 
   const makeFigure = (block, itemTitle) => {
