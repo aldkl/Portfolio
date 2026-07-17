@@ -36,6 +36,54 @@
     return paragraph;
   };
 
+  const getYouTubeVideoId = (url) => {
+    try {
+      const parsed = new URL(url);
+      if (parsed.hostname === "youtu.be") return parsed.pathname.split("/").filter(Boolean)[0] || "";
+      if (parsed.hostname.endsWith("youtube.com")) {
+        if (parsed.pathname === "/watch") return parsed.searchParams.get("v") || "";
+        const parts = parsed.pathname.split("/").filter(Boolean);
+        if (["embed", "shorts", "live"].includes(parts[0])) return parts[1] || "";
+      }
+    } catch (error) {
+      return "";
+    }
+    return "";
+  };
+
+  const makeProjectLink = (link) => {
+    const anchor = document.createElement("a");
+    const videoId = getYouTubeVideoId(link.url);
+    anchor.href = link.url;
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+
+    if (!videoId) {
+      anchor.textContent = link.label;
+      return anchor;
+    }
+
+    anchor.className = "video-link-card";
+    anchor.setAttribute("aria-label", link.label);
+
+    const thumbnail = document.createElement("img");
+    thumbnail.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+    thumbnail.alt = link.label;
+    thumbnail.loading = "lazy";
+
+    const playIcon = document.createElement("span");
+    playIcon.className = "video-link-card__play";
+    playIcon.setAttribute("aria-hidden", "true");
+    playIcon.textContent = "▶";
+
+    const title = document.createElement("span");
+    title.className = "video-link-card__title";
+    title.textContent = link.label;
+
+    anchor.append(thumbnail, playIcon, title);
+    return anchor;
+  };
+
   const makeFigure = (block, itemTitle) => {
     const figure = document.createElement("figure");
     figure.className = "content-figure";
@@ -110,12 +158,7 @@
   const links = document.querySelector("[data-project-links]");
   if (links) {
     links.replaceChildren();
-    (item.links || []).forEach((link) => {
-      const anchor = document.createElement("a");
-      anchor.href = link.url;
-      anchor.textContent = link.label;
-      links.append(anchor);
-    });
+    links.append(...(item.links || []).map(makeProjectLink));
   }
 
   const specs = document.querySelector("[data-project-specs]");
