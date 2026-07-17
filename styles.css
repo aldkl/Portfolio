@@ -403,9 +403,11 @@ h3 {
 
 .detail-hero .project-links:has(.video-embed-card) {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  max-width: 680px;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: none;
   padding-top: 22px;
 }
 

@@ -155,6 +155,11 @@
   if (links) {
     links.replaceChildren();
     links.append(...(item.links || []).map(makeProjectLink));
+
+    if (links.querySelector(".video-embed-card")) {
+      const heroInner = links.closest(".detail-hero__inner");
+      heroInner?.append(links);
+    }
   }
 
   const specs = document.querySelector("[data-project-specs]");
