@@ -49,6 +49,9 @@ MANUAL_TRANSLATIONS = {
         "실시간 셰이더와 Technical Art": "Real-Time Shaders & Technical Art",
         "AI·카메라·미디어 통합": "AI, Camera & Media Integration",
         "API·OCR 도구 개발": "API & OCR Tool Development",
+        "주력": "Primary",
+        "활용": "Working",
+        "기초": "Basic",
         "EditorWindow로 반복 작업을 도구화하고, 여러 머티리얼의 셰이더 속성을 검색·미리보기·일괄 변경하며 Undo를 지원할 수 있습니다.":
             "I can automate repetitive tasks with EditorWindow tools that search, preview, and bulk-edit shader properties across multiple materials with Undo support.",
         "몬스터 공통 Base와 BT 상태, ScriptableObject 기반 카메라 설정, Animator·Spine·FMOD를 게임 이벤트와 연결할 수 있습니다.":
