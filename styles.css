@@ -338,8 +338,7 @@ h3 {
   flex: 0 0 auto;
   width: 24px;
   height: 24px;
-  filter: brightness(0) saturate(100%);
-  opacity: 0.78;
+  opacity: 0.92;
   object-fit: contain;
 }
 
@@ -399,6 +398,45 @@ h3 {
   margin-top: clamp(48px, 7vw, 76px);
   padding-top: clamp(34px, 5vw, 52px);
   border-top: 1px solid var(--line);
+}
+
+.capabilities-section .capabilities {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.home-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-main .hero {
+  order: 1;
+}
+
+.home-main .skills-section {
+  order: 2;
+}
+
+.home-main #projects {
+  order: 3;
+}
+
+.home-main #freelance {
+  order: 4;
+}
+
+.home-main #studies {
+  order: 5;
+}
+
+.home-main .history-section {
+  order: 6;
+}
+
+.home-main .capabilities-section {
+  order: 7;
 }
 
 .capabilities-heading {
