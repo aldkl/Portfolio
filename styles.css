@@ -590,6 +590,10 @@ h3 {
   background: #d9d4ca;
 }
 
+.project--flower-girl img {
+  object-position: center 30%;
+}
+
 .project__image-link {
   display: block;
 }
@@ -621,6 +625,14 @@ h3 {
   width: 100%;
   max-width: none;
   padding-top: 22px;
+}
+
+.detail-hero .project-links:has(.video-embed-card) > a {
+  grid-column: 1 / -1;
+  justify-self: start;
+  min-height: 28px;
+  padding: 0 9px;
+  font-size: 13px;
 }
 
 .project-links a,

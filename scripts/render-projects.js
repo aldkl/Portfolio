@@ -51,6 +51,7 @@
   const renderCard = (item) => {
     const article = document.createElement("article");
     article.className = item.featured ? "project project--featured" : "project";
+    article.classList.add(`project--${item.slug}`);
 
     const detailUrl = `project.html?work=${encodeURIComponent(item.slug)}`;
     const imageLink = document.createElement("a");

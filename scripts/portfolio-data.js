@@ -58,7 +58,7 @@ window.PORTFOLIO_ITEMS = [
     problem: "요리와 재료 수가 계속 바뀔 수 있어 하드코딩하면 수정 비용이 커지는 구조였습니다.",
     solution: "Recipe와 Ingredient를 리스트 기반 데이터로 구성해 엔진에서 쉽게 조정할 수 있게 만들었습니다.",
     learned: "콘텐츠 수가 늘어나는 게임에서는 처음부터 데이터 확장성을 확보해야 한다는 점을 배웠습니다.",
-    image: "assets/portfolio/yorijori.png",
+    image: "assets/portfolio/yorijori-video.jpg",
     gallery: ["assets/projects/yorijori/01.png"],
     links: [
       { label: "영상", url: "https://youtu.be/h7lnSOAWpxM?si=_vz6FD4Aeqfo89GA" },
