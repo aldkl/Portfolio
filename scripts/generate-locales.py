@@ -67,6 +67,12 @@ MANUAL_TRANSLATIONS = {
             "SDF face-shadow behavior under changing light and character directions",
         "실제 플레이에서 가림 오브젝트가 거리 기반으로 디더링되는 결과":
             "Distance-based dithering of occluding objects during gameplay",
+        "직접 제작한 애니메이션 결과": "Original Animation Work",
+        "착지·슬라이딩·점프로 이어지는 플레이어 벽점프 애니메이션":
+            "Player wall-jump animation transitioning from landing to sliding and jumping",
+        "플레이어 비전투 Idle 애니메이션": "Player non-combat idle animation",
+        "몬스터 Scopi 걷기 애니메이션": "Scopi monster walk animation",
+        "몬스터 Scopi 캐치 애니메이션": "Scopi monster catch animation",
     },
     "ja": {
         "상": "上",
@@ -90,6 +96,12 @@ MANUAL_TRANSLATIONS = {
             "光源とキャラクター方向の変化に応じたSDF顔シャドウの結果",
         "실제 플레이에서 가림 오브젝트가 거리 기반으로 디더링되는 결과":
             "実際のプレイ中に遮蔽物へ適用した距離ベースのディザリング結果",
+        "직접 제작한 애니메이션 결과": "制作したアニメーション作品",
+        "착지·슬라이딩·점프로 이어지는 플레이어 벽점프 애니메이션":
+            "着地・スライディング・ジャンプへとつながるプレイヤーの壁ジャンプアニメーション",
+        "플레이어 비전투 Idle 애니메이션": "プレイヤーの非戦闘時Idleアニメーション",
+        "몬스터 Scopi 걷기 애니메이션": "モンスターScopiの歩行アニメーション",
+        "몬스터 Scopi 캐치 애니메이션": "モンスターScopiのキャッチアニメーション",
     },
 }
 
