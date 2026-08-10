@@ -385,8 +385,8 @@ window.PORTFOLIO_ITEMS = [
     problem: "같은 쉐이더를 쓰는 여러 메테리얼의 값을 반복 수정해야 했습니다.",
     solution: "Shader All Materials, Selected Materials, Dragged Materials 세 범위를 제공하는 에디터 창을 만들었습니다.",
     learned: "반복 작업을 툴로 바꾸면 팀 전체의 수정 비용과 실수를 줄일 수 있다는 점을 배웠습니다.",
-    image: "assets/works/material-tool/01.png",
-    gallery: ["assets/works/material-tool/01.png", "assets/works/material-tool/02.png"],
+    image: "assets/works/material-tool/03.png",
+    gallery: ["assets/works/material-tool/03.png", "assets/works/material-tool/04.png"],
     links: [],
   },
   {

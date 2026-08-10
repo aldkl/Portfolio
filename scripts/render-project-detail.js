@@ -99,6 +99,28 @@
     return figure;
   };
 
+  const makeVideoFigure = (block, itemTitle) => {
+    const figure = document.createElement("figure");
+    figure.className = "content-figure content-video";
+
+    const video = document.createElement("video");
+    video.src = block.src;
+    video.controls = true;
+    video.preload = "metadata";
+    video.playsInline = true;
+    video.setAttribute("aria-label", block.caption || `${itemTitle} 결과 영상`);
+    if (block.poster) video.poster = block.poster;
+    figure.append(video);
+
+    if (block.caption) {
+      const caption = document.createElement("figcaption");
+      caption.textContent = block.caption;
+      figure.append(caption);
+    }
+
+    return figure;
+  };
+
   const renderContentBlocks = (container, item) => {
     const blocks = (window.PORTFOLIO_CONTENT || {})[item.slug];
     container.replaceChildren();
@@ -110,6 +132,8 @@
           container.append(makeText("h3", block.text));
         } else if (block.type === "image") {
           container.append(makeFigure(block, item.title));
+        } else if (block.type === "video") {
+          container.append(makeVideoFigure(block, item.title));
         } else {
           container.append(makeParagraph(block.text));
         }

@@ -972,6 +972,14 @@ h3 {
   object-fit: contain;
 }
 
+.content-video video {
+  display: block;
+  width: 100%;
+  max-height: 720px;
+  border-radius: 8px;
+  background: #171717;
+}
+
 .content-figure figcaption {
   margin-top: 10px;
   color: var(--muted);

@@ -52,14 +52,26 @@ MANUAL_TRANSLATIONS = {
         "주력": "Primary",
         "활용": "Working",
         "기초": "Basic",
+        "상": "High",
+        "중": "Intermediate",
+        "하": "Basic",
         "EditorWindow로 반복 작업을 도구화하고, 여러 머티리얼의 셰이더 속성을 검색·미리보기·일괄 변경하며 Undo를 지원할 수 있습니다.":
             "I can automate repetitive tasks with EditorWindow tools that search, preview, and bulk-edit shader properties across multiple materials with Undo support.",
         "몬스터 공통 Base와 BT 상태, ScriptableObject 기반 카메라 설정, Animator·Spine·FMOD를 게임 이벤트와 연결할 수 있습니다.":
             "I can connect shared monster bases and behavior-tree states, ScriptableObject-based camera settings, and Animator, Spine, and FMOD systems to gameplay events.",
         "URP 툰 라이팅, SDF 얼굴 그림자, Rim Light, 거리 기반 디더링과 월드 좌표 UV 등 프로젝트에 필요한 화면 표현을 구현할 수 있습니다.":
             "I can implement project-specific visuals including URP toon lighting, SDF face shadows, rim lighting, distance-based dithering, and world-space UVs.",
+        "캐릭터를 회전하며 확인한 Rim Light 적용 결과":
+            "Rim light behavior verified while rotating the character",
+        "광원과 캐릭터 방향 변화에 따른 SDF 얼굴 그림자 결과":
+            "SDF face-shadow behavior under changing light and character directions",
+        "실제 플레이에서 가림 오브젝트가 거리 기반으로 디더링되는 결과":
+            "Distance-based dithering of occluding objects during gameplay",
     },
     "ja": {
+        "상": "上",
+        "중": "中",
+        "하": "下",
         "청강대 졸업작품에 들어가는 물 쉐이더에서 캐주얼한 foam 파트를 추가한 작업입니다.":
             "チョンガン文化産業大学の卒業制作で使用するウォーターシェーダーに、カジュアルなフォーム表現を追加しました。",
         "Git·GitHub와 배포": "Git・GitHubとデプロイ",
@@ -72,6 +84,12 @@ MANUAL_TRANSLATIONS = {
             "移動、インタラクション、パズル、衝突判定、セーブ・ロード、非同期シーン遷移など、ゲームプレイに必要な機能を連携できます。",
         "게임과 도구의 저장소를 관리하고, GitHub Pages 배포, 프론트엔드와 API 서버 분리, 다국어 README와 라이선스 문서화를 할 수 있습니다.":
             "ゲームやツールのリポジトリを管理し、GitHub Pagesへのデプロイ、フロントエンドとAPIサーバーの分離、多言語READMEとライセンス文書の整備ができます。",
+        "캐릭터를 회전하며 확인한 Rim Light 적용 결과":
+            "キャラクターを回転させて検証したリムライトの適用結果",
+        "광원과 캐릭터 방향 변화에 따른 SDF 얼굴 그림자 결과":
+            "光源とキャラクター方向の変化に応じたSDF顔シャドウの結果",
+        "실제 플레이에서 가림 오브젝트가 거리 기반으로 디더링되는 결과":
+            "実際のプレイ中に遮蔽物へ適用した距離ベースのディザリング結果",
     },
 }
 
