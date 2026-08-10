@@ -73,6 +73,15 @@ MANUAL_TRANSLATIONS = {
         "플레이어 비전투 Idle 애니메이션": "Player non-combat idle animation",
         "몬스터 Scopi 걷기 애니메이션": "Scopi monster walk animation",
         "몬스터 Scopi 캐치 애니메이션": "Scopi monster catch animation",
+        "Blend Tree 좌우 방향 전환": "Left/Right Direction Switching with a Blend Tree",
+        "사이드뷰에서 캐릭터를 회전해 뒷모습이 보이는 문제를 해결하기 위해 좌·우 애니메이션을 Blend Tree로 연결했습니다. 이동 방향에 따라 bLeftTrue 값을 0 또는 1로 전달해 해당 방향의 애니메이션을 재생합니다.":
+            "To prevent the character's back from showing when turning in the side view, I connected left- and right-facing animations through a Blend Tree. The movement direction sets bLeftTrue to 0 or 1 to play the matching animation.",
+        "Unity Animator에서 좌·우 달리기 애니메이션을 연결한 Blend Tree":
+            "Blend Tree connecting left- and right-facing run animations in Unity Animator",
+        "이동 방향에 따라 Blend Tree 파라미터를 전환하는 코드":
+            "Code that switches the Blend Tree parameter based on movement direction",
+        "Blend Tree를 적용한 캐릭터 좌·우 방향 전환 결과":
+            "Character left/right direction switching with the Blend Tree applied",
     },
     "ja": {
         "상": "上",
@@ -102,6 +111,15 @@ MANUAL_TRANSLATIONS = {
         "플레이어 비전투 Idle 애니메이션": "プレイヤーの非戦闘時Idleアニメーション",
         "몬스터 Scopi 걷기 애니메이션": "モンスターScopiの歩行アニメーション",
         "몬스터 Scopi 캐치 애니메이션": "モンスターScopiのキャッチアニメーション",
+        "Blend Tree 좌우 방향 전환": "Blend Treeによる左右方向の切り替え",
+        "사이드뷰에서 캐릭터를 회전해 뒷모습이 보이는 문제를 해결하기 위해 좌·우 애니메이션을 Blend Tree로 연결했습니다. 이동 방향에 따라 bLeftTrue 값을 0 또는 1로 전달해 해당 방향의 애니메이션을 재생합니다.":
+            "サイドビューでキャラクターを回転させた際に背面が見える問題を解決するため、左右のアニメーションをBlend Treeで接続しました。移動方向に応じてbLeftTrueへ0または1を渡し、対応する方向のアニメーションを再生します。",
+        "Unity Animator에서 좌·우 달리기 애니메이션을 연결한 Blend Tree":
+            "Unity Animatorで左右の走行アニメーションを接続したBlend Tree",
+        "이동 방향에 따라 Blend Tree 파라미터를 전환하는 코드":
+            "移動方向に応じてBlend Treeパラメータを切り替えるコード",
+        "Blend Tree를 적용한 캐릭터 좌·우 방향 전환 결과":
+            "Blend Treeを適用したキャラクターの左右方向切り替え結果",
     },
 }
 
