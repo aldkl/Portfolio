@@ -960,8 +960,54 @@ h3 {
   font-size: 17px;
 }
 
+.content-flow h4 {
+  margin: 14px 0 -8px;
+  color: var(--ink);
+  font-size: 19px;
+}
+
 .content-figure {
   margin: 4px 0 10px;
+}
+
+.content-code {
+  position: relative;
+  margin: 2px 0 10px;
+}
+
+.code-block {
+  overflow-x: auto;
+  margin: 0;
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13.5px;
+  line-height: 1.7;
+  tab-size: 4;
+}
+
+.code-block code {
+  font-family: "JetBrains Mono", "D2Coding", ui-monospace, SFMono-Regular, Menlo,
+    Consolas, "Liberation Mono", monospace;
+  white-space: pre;
+}
+
+.code-block[data-lang]::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px 12px;
+  border-left: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0 8px 0 8px;
+  background: var(--surface-soft);
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .content-figure img {

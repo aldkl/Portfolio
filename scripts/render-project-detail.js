@@ -121,6 +121,31 @@
     return figure;
   };
 
+  const makeCodeFigure = (block) => {
+    const figure = document.createElement("figure");
+    figure.className = "content-figure content-code";
+
+    const pre = document.createElement("pre");
+    pre.className = "code-block notranslate";
+    pre.setAttribute("translate", "no");
+    if (block.lang) {
+      pre.dataset.lang = block.lang;
+    }
+
+    const code = document.createElement("code");
+    code.textContent = block.text;
+    pre.append(code);
+    figure.append(pre);
+
+    if (block.caption) {
+      const caption = document.createElement("figcaption");
+      caption.textContent = block.caption;
+      figure.append(caption);
+    }
+
+    return figure;
+  };
+
   const renderContentBlocks = (container, item) => {
     const blocks = (window.PORTFOLIO_CONTENT || {})[item.slug];
     container.replaceChildren();
@@ -130,6 +155,10 @@
       blocks.forEach((block) => {
         if (block.type === "h3") {
           container.append(makeText("h3", block.text));
+        } else if (block.type === "h4") {
+          container.append(makeText("h4", block.text));
+        } else if (block.type === "code") {
+          container.append(makeCodeFigure(block));
         } else if (block.type === "image") {
           container.append(makeFigure(block, item.title));
         } else if (block.type === "video") {

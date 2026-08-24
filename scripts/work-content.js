@@ -5,6 +5,277 @@ window.PORTFOLIO_CONTENT = {
     { type: "h3", text: "플레이어와 게임 로직" },
     { type: "p", text: "플레이어의 기본 공격 콤보와 대쉬 공격, 피격 무적, 벽 감지와 벽 이동, 아래 점프를 구현했습니다. Spline을 이용한 앞뒤 Z축 이동과 진입 방향에 따라 통과 여부를 판단하는 One Way Platform, 부서지는 벽과 낙하 시 리스폰 같은 스테이지 기믹도 제작했습니다." },
     { type: "p", text: "몬스터 공통 Base와 BT 구조를 만들고 Ira, Nuovo, Scopi의 이동·추적·공격·스턴·캐치·그로기 상태를 연결했습니다. 카메라 매니저, ScriptableObject 기반 카메라 설정, 바운더리와 타겟 그룹을 구현하고 Z축 이동과 전투 상황에 맞춰 카메라 동작을 조정했습니다." },
+    { type: "p", text: "아래 코드는 실제 프로젝트에서 발췌했습니다. 제가 작성한 커밋만 따로 추출해 공개한 저장소 github.com/aldkl/dear-my-prince-ta-work 에서 전체 구현을 볼 수 있습니다." },
+
+    { type: "h4", text: "공격 콤보 · 애니메이션 클립 이벤트로 입력 구간 제어" },
+    { type: "p", text: "콤보 입력을 받는 구간의 시작과 끝을 공격 애니메이션 클립에 이벤트로 심었습니다. 입력 구간이 열려 있는 동안 공격 키를 누르면 다음 콤보를 예약해 두고, 클립 뒤쪽에 심어 둔 이벤트가 예약된 공격을 바로 이어서 재생합니다. 경과 시간 대신 클립 이벤트를 기준으로 삼았기 때문에 애니메이션 길이가 바뀌어도 코드에서 타이밍 값을 다시 맞출 필요가 없습니다. 대쉬 중이거나 Spline 이동 중일 때는 입력 자체를 받지 않도록 막았습니다." },
+    { type: "code", lang: "csharp", caption: "AttackSystem.cs · 콤보 입력 예약과 다음 공격 연결", text: `// Assets/Scripts/Move/AttackSystem.cs
+private void Update()
+{
+    // 일반 공격 입력 처리
+    if (inputHandler.AttackRequested)
+    {
+        if (dashSystem.IsDashing || movementPhysics.IsSpline)
+        {
+            return;
+        }
+        // 현재 공격 중이고 콤보 가능 시간 내에 있다면
+        if (isAttacking && isCanCombo && currentComboCount < maxComboCount)
+        {
+            isComboRequested = true;
+            isCanCombo = false;
+        }
+        // 새로운 공격 시작 조건
+        else if (canAttack && !isAttacking && groundDetector.IsGrounded)
+        {
+            StartAttack();
+        }
+    }
+    // ...
+}
+
+public void AniEventAttackComboStart()
+{
+    isCanCombo = true;
+}
+
+public void AniEventAttackComboEnd()
+{
+    isCanCombo = false;
+}
+
+public void AniEventAttackComboNext()
+{
+    // 콤보 요청이 있으면 즉시 다음 공격 시작
+    if (isComboRequested && currentComboCount <= maxComboCount)
+    {
+        StartAttack();
+        isComboRequested = false;
+    }
+}` },
+
+    { type: "h4", text: "피격 무적 · 중첩을 견디는 카운터 방식" },
+    { type: "p", text: "무적 상태를 bool 하나로 두면 피격 무적이 끝나는 순간 다른 곳에서 건 무적까지 같이 풀리는 문제가 있습니다. 그래서 무적을 정수 카운터로 관리해 무적을 건 쪽이 각자 올리고 내리도록 했습니다. 카운터가 0보다 크면 피격 판정을 무시하므로, 피격 무적과 아이템 효과가 겹쳐도 서로의 상태를 덮어쓰지 않습니다. 피격 처리는 넉백과 입력 잠금, 피격 애니메이션을 함께 실행하고 무적 시간 동안 캐릭터를 깜빡이게 합니다." },
+    { type: "code", lang: "csharp", caption: "Player.cs · 카운터 기반 무적과 피격 처리", text: `// Assets/Scripts/InGameObjects/Player/Player.cs
+public bool TakeDamage(int damage, Vector3 attackFrom)
+{
+    if (isInvincibleCount > 0 || IsDead)
+        return false;
+
+    ApplyDamageEffects(attackFrom);
+    // ... 방어 장식 아이템 보정 ...
+    ApplyDamage(damage);
+
+    if (IsDead)
+    {
+        Die();
+        return true;
+    }
+
+    StartHitInvincibility().Forget();
+    UpdateHealthUI();
+    return false;
+}
+
+private async UniTaskVoid StartHitInvincibility()
+{
+    StartInvincibility();
+    PlayInvincibilityEffect();
+    await UniTask.Delay(TimeSpan.FromSeconds(invincibilityDuration));
+    EndHitInvincibility();
+}
+
+public void StartInvincibility() {
+    isInvincibleCount++;
+}
+
+public void EndInvincibility() {
+    if (isInvincibleCount > 0) {
+        isInvincibleCount--;
+    }
+}` },
+
+    { type: "h4", text: "One Way Platform · 진입 방향으로 통과 판정" },
+    { type: "p", text: "아래에서 올라올 때는 통과하고 위에서 밟을 때는 막아야 하는 발판입니다. 플레이어가 트리거에 들어온 순간의 Rigidbody 속도를 접근 방향으로 삼고, 속도가 거의 없으면 위치 차이로 방향을 구합니다. 그 방향과 발판에 설정한 진입 방향을 내적해 반대쪽에서 접근한 경우에만 Physics.IgnoreCollision으로 충돌을 꺼 줍니다. 아래 점프는 별도 메서드로 충돌을 강제로 무시하게 만들고, 트리거를 벗어나면 충돌을 되돌립니다." },
+    { type: "code", lang: "csharp", caption: "OneWayPlatform.cs · 접근 방향 내적으로 통과 여부 결정", text: `// Assets/Scripts/InGameObjects/Objects/OneWayPlatform.cs
+public void HandleTriggerEnter(Collider other)
+{
+    if (other.CompareTag("Player") && !allowPlayerToPass)
+    {
+        Rigidbody rb = other.attachedRigidbody;
+        if (rb == null) return;
+
+        playerCollider = other;
+
+        Vector3 approachDirection;
+
+        // 속도로 방향 파악, 속도가 너무 낮으면 위치 기반으로 판단
+        if (rb.linearVelocity.magnitude > 0.1f)
+        {
+            approachDirection = -rb.linearVelocity.normalized;
+        }
+        else
+        {
+            approachDirection = (other.bounds.center - transform.position).normalized;
+        }
+
+        playerToPass = CheckShouldPassPlatform(approachDirection);
+
+        Physics.IgnoreCollision(collider, other, playerToPass);
+    }
+}
+
+private bool CheckShouldPassPlatform(Vector3 approachDirection)
+{
+    Vector3 platformDirection = GetPlatformDirection();
+    float dot = Vector3.Dot(platformDirection, approachDirection);
+
+    // 엔트리 방향의 반대 방향에서 접근하면 통과 허용
+    return dot < -entryThreshold;
+}
+
+// 아래 점프용 메서드 - 플레이어 충돌 상태를 무조건 통과로 설정
+public void IgnorePlatformCollision(Collider other)
+{
+    // 충돌 상태를 통과로 설정
+    allowPlayerToPass = true;
+    // 즉시 적용
+    Physics.IgnoreCollision(collider, other, true);
+}` },
+
+    { type: "h4", text: "Spline 기반 Z축 이동" },
+    { type: "p", text: "사이드뷰 스테이지에서 앞뒤 공간으로 넘어가는 이동입니다. 존에 진입하면 Unity Splines의 경로를 정규화된 시간으로 훑으면서 플레이어 위치를 옮기고, 같은 지점의 탄젠트를 구해 진행 방향을 바라보게 합니다. 역방향은 시간을 거꾸로 흘리고 탄젠트를 뒤집어 같은 경로를 그대로 재사용했습니다. 이동을 시작할 때 맵 섹션 인덱스를 옮기고 카메라를 Z 이동용 프리셋으로 전환했다가, 도착하면 이전 프리셋으로 되돌립니다." },
+    { type: "code", lang: "csharp", caption: "Spline.cs · 경로를 따라 플레이어를 이동시키는 코루틴", text: `// Assets/Scripts/InGameObjects/Objects/Spline.cs
+private IEnumerator MoveAlongSpline(bool isForward)
+{
+    float startTime = isForward ? 0f : duration;
+    float endTime = isForward ? duration : 0f;
+    float currentTime = startTime;
+
+    while ((isForward && currentTime < endTime) || (!isForward && currentTime > endTime))
+    {
+        // 정규화된 시간 계산 (0~1 사이)
+        float normalizedTime = currentTime / duration;
+
+        // 스플라인 상의 위치 계산
+        Vector3 position = splineContainer.EvaluatePosition(normalizedTime);
+        playerObject.transform.position = position;
+
+        // 스플라인의 방향을 바라보도록 설정
+        Vector3 tangent = splineContainer.EvaluateTangent(normalizedTime);
+        if (tangent != Vector3.zero)
+        {
+            // 역방향일 경우 탄젠트 방향 반전
+            if (!isForward) tangent = -tangent;
+            playerObject.transform.forward = tangent;
+        }
+
+        // 시간 업데이트
+        currentTime += (isForward ? Time.deltaTime : -Time.deltaTime);
+
+        yield return null;
+    }
+
+    // ... 도착 위치 보정, 콜라이더 복구, 맵 섹션 갱신 ...
+    CameraManager.Instance.ApplySettings(CameraManager.Instance.GetPreviousSetting());
+}` },
+
+    { type: "h4", text: "몬스터 공통 Base와 Behavior Tree" },
+    { type: "p", text: "Ira, Nuovo, Scopi가 각각 다르게 움직이지만 판정 기준과 상태 전환은 같아야 했습니다. 그래서 추상 클래스 MonsterBase에 이동·공격·스턴·탐지 범위 판정 같은 공통 계약을 선언하고 몬스터별 클래스가 이를 구현하도록 했습니다. Behavior Tree 노드는 몬스터를 직접 움직이지 않고, 블랙보드로 받은 MonsterBase에 플래그와 목표 위치만 넘깁니다. 실제 이동은 몬스터 쪽이 처리하므로 트리를 수정해도 몬스터 구현은 건드리지 않아도 됩니다." },
+    { type: "code", lang: "csharp", caption: "MonsterBase.cs · 몬스터가 구현해야 할 공통 계약", text: `// Assets/Scripts/InGameObjects/Monsters/MonsterBase.cs
+// 몬스터의 기본 상태를 관리하는 추상 클래스
+public abstract class MonsterBase : MonoBehaviour
+{
+    protected MonsterFSM monsterFSM;
+    protected BehaviorGraphAgent agent;
+    // ...
+
+    public abstract void Die();
+    public abstract void Move();
+    public abstract void Attack(int attackType);
+    public abstract void Stun(float duration);
+    public abstract bool CheckPlayerInDetectionRange();
+    public abstract bool CheckPlayerInAttackRange();
+    public abstract bool CheckIsInSpawnPosition();
+    public abstract void LookSide(Vector3 isLeft);
+    public abstract void RotateTo(Vector3 targetDirection);
+    public abstract bool ReturnToOriginalPosition();
+    public abstract float GetDistanceToPlayer(Vector3 Checkpos);
+    // ...
+}` },
+    { type: "code", lang: "csharp", caption: "ChaseAction.cs · 이동을 직접 하지 않고 플래그만 넘기는 BT 노드", text: `// Assets/Scripts/Behavior/BehaviorNodes/Actions/ChaseAction.cs
+[Serializable, GeneratePropertyBag]
+[NodeDescription(name: "Chase", story: "Set [Self] [IsChsing] and Update [Target]", category: "Action",
+    id: "9dc876c3cba100890cc314fe4e326965")]
+public partial class ChaseAction : Action
+{
+    [SerializeReference] public BlackboardVariable<MonsterBase> Self;
+    [SerializeReference] public BlackboardVariable<GameObject> Target;
+    [SerializeReference] public BlackboardVariable<bool> IsChasing;
+
+    protected override Status OnUpdate()
+    {
+        if (Self.Value != null && Target.Value != null)
+        {
+            // 직접 이동하는 대신 플래그만 설정
+            Self.Value.IsChasing = IsChasing;
+            Self.Value.SetTargetPosition(Target.Value.transform.position);
+
+            return Status.Success; // 계속 실행 중
+        }
+
+        return Status.Failure;
+    }
+}` },
+
+    { type: "h4", text: "ScriptableObject 카메라 프리셋" },
+    { type: "p", text: "전투, Z축 이동, 컷신처럼 상황마다 필요한 카메라 값이 달라서 설정을 ScriptableObject 프리셋으로 분리했습니다. 카메라 거리, 화면상 위치, 데드존, 타겟 오프셋 같은 값마다 사용 여부 토글을 두어 프리셋이 지정한 항목만 덮어쓰고 나머지는 현재 값을 유지하게 했습니다. 전환 커브와 시간도 프리셋에 함께 담아 상황이 바뀔 때 카메라가 튀지 않고 넘어가도록 했습니다. 덕분에 새로운 연출은 코드 수정 없이 프리셋 에셋을 만들어 트리거에 연결하는 것으로 끝납니다." },
+    { type: "code", lang: "csharp", caption: "CameraSettings.cs · 항목별 사용 여부를 가진 카메라 프리셋", text: `// Assets/Scripts/Camera/Cameramanagers/CameraSettings.cs
+[CreateAssetMenu(fileName = "CameraSetting", menuName = "ScriptableObjects/Camera Setting Preset")]
+public class CameraSettings : ScriptableObject
+{
+    [System.Serializable]
+    public class PositionComposerSettings
+    {
+        [Header("Camera Distance")]
+        public bool useCameraDistance = false;
+        [ConditionalHide("useCameraDistance")]
+        public float cameraDistance = 8f;
+
+        [Header("Composition - Screen Position")]
+        public bool useScreenPosition = false;
+        [ConditionalHide("useScreenPosition")]
+        public Vector2 screenPosition = Vector2.zero;
+
+        [Header("Composition - Dead Zone")]
+        public bool useDeadZone = false;
+        [ConditionalHide("useDeadZone")]
+        public Vector2 deadZoneSize = Vector2.zero;
+
+        [Header("Target Tracking")]
+        public bool useTargetOffset = false;
+        [ConditionalHide("useTargetOffset")]
+        public Vector3 targetOffset;
+        // ...
+    }
+
+    [System.Serializable]
+    public class TransitionSettings
+    {
+        public bool useTransitionSettings = false;
+        [ConditionalHide("useTransitionSettings")]
+        public AnimationCurve transitionCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+        [ConditionalHide("useTransitionSettings")]
+        [Range(0f, 5f)] public float duration = 0.5f;
+    }
+
+    [Header("Position Composer Settings")]
+    public PositionComposerSettings composerSettings = new PositionComposerSettings();
+
+    [Header("Transition Settings")]
+    public TransitionSettings transitionSettings = new TransitionSettings();
+    // ...
+}` },
     { type: "h3", text: "애니메이션 제작 및 시스템" },
     { type: "p", text: "기존 커스텀 애니메이션 방식을 Unity Animator 기반으로 전환하고, 좌우 방향 애니메이션을 Blend Tree로 연결했습니다. 플레이어 공격·대쉬·점프·랜딩과 몬스터 애니메이션을 적용하고 이벤트 연결과 전환 버그를 수정했습니다." },
     { type: "p", text: "직접 제작한 애니메이션에는 플레이어 벽점프의 착지·슬라이딩·점프 동작, 비전투 Idle, Scopi의 걷기와 캐치, 부서지는 벽 동작이 포함됩니다. 벽점프는 착지부터 슬라이딩 준비, 루프, 점프까지 한 흐름으로 제작하고 발 위치와 허리·목 각도, 재생 속도를 폴리싱했습니다." },
