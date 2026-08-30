@@ -353,18 +353,6 @@ h3 {
   object-fit: contain;
 }
 
-/* 로고가 없는 항목은 같은 자리에 강조 점을 두어 정렬을 맞춘다. */
-.tool-card--plain::before {
-  content: "";
-  flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at center, var(--accent) 0 3.5px, transparent 3.5px),
-    rgba(23, 107, 135, 0.07);
-}
-
 .tool-name {
   flex: 1 1 auto;
   line-height: 1.3;
