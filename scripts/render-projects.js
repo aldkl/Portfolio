@@ -29,6 +29,7 @@
     const details = [
       ["개발목적", item.purpose],
       ["개발기간", item.period],
+      ["담당 파트", item.parts ? item.parts.join(", ") : ""],
       ["개발인원", item.team],
     ].filter(([, value]) => value);
 

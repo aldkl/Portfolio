@@ -108,8 +108,8 @@ a {
 
 .nav a:hover,
 .nav a:focus-visible,
-.project a:hover,
-.project a:focus-visible,
+.project a:not(.project-detail-link):hover,
+.project a:not(.project-detail-link):focus-visible,
 .contact-panel a:hover,
 .contact-panel a:focus-visible {
   color: var(--accent);
@@ -120,8 +120,8 @@ a {
   grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
   align-items: center;
   gap: clamp(28px, 5vw, 76px);
-  min-height: calc(100svh - 68px);
-  padding: clamp(44px, 7vw, 88px) clamp(20px, 5vw, 72px) clamp(48px, 7vw, 92px);
+  min-height: calc(82svh - 68px);
+  padding: clamp(36px, 5vw, 64px) clamp(20px, 3.5vw, 48px) clamp(40px, 5vw, 68px);
   overflow: hidden;
 }
 
@@ -252,7 +252,7 @@ h3 {
 }
 
 .section {
-  padding: clamp(62px, 9vw, 116px) clamp(20px, 5vw, 72px);
+  padding: clamp(44px, 5.5vw, 76px) clamp(20px, 3.5vw, 48px);
 }
 
 .section--muted {
@@ -260,7 +260,7 @@ h3 {
 }
 
 .section__inner {
-  width: min(100%, 1160px);
+  width: min(100%, 1400px);
   margin: 0 auto;
 }
 
@@ -298,8 +298,19 @@ h3 {
 
 .skills-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.65fr);
+  grid-template-columns: minmax(0, 1.55fr) minmax(240px, 0.65fr);
   gap: clamp(36px, 6vw, 80px);
+  align-items: start;
+}
+
+.skills-column {
+  display: grid;
+  gap: clamp(26px, 3vw, 36px);
+}
+
+.skills-column .skills-block + .skills-block {
+  padding-top: clamp(24px, 3vw, 32px);
+  border-top: 1px solid var(--line);
 }
 
 .skills-subtitle {
@@ -318,7 +329,7 @@ h3 {
 
 .tool-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
   gap: 12px;
 }
 
@@ -340,6 +351,18 @@ h3 {
   height: 24px;
   opacity: 0.92;
   object-fit: contain;
+}
+
+/* 로고가 없는 항목은 같은 자리에 강조 점을 두어 정렬을 맞춘다. */
+.tool-card--plain::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, var(--accent) 0 3.5px, transparent 3.5px),
+    rgba(23, 107, 135, 0.07);
 }
 
 .tool-name {
@@ -394,6 +417,34 @@ h3 {
   font-size: 9px;
 }
 
+.skills-subtitle--spaced {
+  margin-top: 28px;
+}
+
+.certificate-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.certificate-list li {
+  display: grid;
+  gap: 3px;
+}
+
+.certificate-name {
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.certificate-meta {
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .capabilities {
   margin-top: clamp(48px, 7vw, 76px);
   padding-top: clamp(34px, 5vw, 52px);
@@ -431,14 +482,6 @@ h3 {
   order: 5;
 }
 
-.home-main .history-section {
-  order: 6;
-}
-
-.home-main .capabilities-section {
-  order: 7;
-}
-
 .capabilities-heading {
   display: flex;
   align-items: end;
@@ -465,6 +508,14 @@ h3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
+}
+
+.capability-grid--compact .capability-card {
+  min-height: 0;
+}
+
+.capability-grid--compact .capability-card > span {
+  margin-bottom: 14px;
 }
 
 .capability-card {
@@ -543,12 +594,21 @@ h3 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.timeline--stacked {
+  grid-template-columns: 1fr;
+}
+
 .timeline li,
 .compact-list li {
   position: relative;
   padding-left: 18px;
   color: var(--muted);
   font-size: 16px;
+}
+
+.timeline--stacked li {
+  color: var(--ink);
+  font-weight: 650;
 }
 
 .timeline li::before,
@@ -590,8 +650,21 @@ h3 {
   background: #d9d4ca;
 }
 
+/* 대표 프로젝트 옆 카드의 이미지가 남는 세로 공간을 채우도록 늘린다. */
+.project--flower-girl .project__image-link {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 200px;
+}
+
 .project--flower-girl img {
+  height: 100%;
+  aspect-ratio: auto;
   object-position: center 30%;
+}
+
+.project--flower-girl .project__body {
+  flex: 0 0 auto;
 }
 
 .project__image-link {
@@ -619,12 +692,11 @@ h3 {
 
 .detail-hero .project-links:has(.video-embed-card) {
   display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
   gap: 16px;
   width: 100%;
   max-width: none;
-  padding-top: 22px;
+  padding-top: 0;
 }
 
 .detail-hero .project-links:has(.video-embed-card) > a {
@@ -679,6 +751,27 @@ h3 {
   margin-top: auto;
   background: var(--accent);
   color: #ffffff;
+  transition: background-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+
+.project-detail-link:hover,
+.project-detail-link:focus-visible {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(23, 107, 135, 0.28);
+  transform: translateY(-1px) scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-detail-link {
+    transition: none;
+  }
+
+  .project-detail-link:hover,
+  .project-detail-link:focus-visible {
+    transform: none;
+  }
 }
 
 .project-details {
@@ -836,7 +929,7 @@ h3 {
 }
 
 .detail-hero {
-  padding: clamp(46px, 7vw, 92px) clamp(20px, 5vw, 72px);
+  padding: clamp(38px, 5vw, 68px) clamp(20px, 3.5vw, 48px);
 }
 
 .detail-hero__inner {
@@ -860,11 +953,14 @@ h3 {
   color: var(--accent);
 }
 
-.detail-layout {
+.detail-hero__media-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.8fr);
-  gap: clamp(28px, 5vw, 72px);
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  gap: clamp(20px, 3vw, 32px);
   align-items: start;
+  width: 100%;
+  padding-top: clamp(24px, 3vw, 40px);
 }
 
 .detail-specs {
@@ -875,6 +971,14 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
+}
+
+/* 영상이 없는 경우 사양 목록을 히어로 아래 가로 띠로 펼친다. */
+.detail-hero__inner > .detail-specs {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px 28px;
+  margin-top: clamp(24px, 3vw, 40px);
 }
 
 .detail-specs div {
@@ -915,6 +1019,7 @@ h3 {
 
 .learning-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 16px;
   margin-bottom: 32px;
 }
@@ -1038,16 +1143,16 @@ h3 {
   .split-section,
   .split-section--reverse,
   .detail-hero__inner,
-  .detail-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .skills-layout {
+  .detail-hero__media-row {
     grid-template-columns: 1fr;
   }
 
   .capability-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skills-layout {
+    grid-template-columns: 1fr;
   }
 
   .hero__media {

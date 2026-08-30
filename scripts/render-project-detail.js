@@ -208,11 +208,6 @@
   if (links) {
     links.replaceChildren();
     links.append(...(item.links || []).map(makeProjectLink));
-
-    if (links.querySelector(".video-embed-card")) {
-      const heroInner = links.closest(".detail-hero__inner");
-      heroInner?.append(links);
-    }
   }
 
   const specs = document.querySelector("[data-project-specs]");
@@ -232,6 +227,15 @@
         row.append(makeText("dt", label), makeText("dd", value));
         specs.append(row);
       });
+  }
+
+  // 영상이 있으면 사양 목록을 영상 옆으로 옮겨 히어로 아래 한 줄로 묶는다.
+  const heroInner = document.querySelector(".detail-hero__inner");
+  if (heroInner && links && specs && links.querySelector(".video-embed-card")) {
+    const mediaRow = document.createElement("div");
+    mediaRow.className = "detail-hero__media-row";
+    mediaRow.append(links, specs);
+    heroInner.append(mediaRow);
   }
 
   const content = document.querySelector("[data-project-content]");
