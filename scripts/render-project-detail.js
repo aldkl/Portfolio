@@ -185,7 +185,31 @@
     );
   };
 
-  document.title = `${item.title} | 이창준 Portfolio`;
+  const SITE_URL = "https://aldkl.github.io/Portfolio/";
+  const absoluteUrl = (path) => new URL(path, SITE_URL).href;
+
+  const setMetaContent = (selector, value) => {
+    const element = document.head.querySelector(selector);
+    if (element && value) {
+      element.setAttribute("content", value);
+    }
+  };
+
+  const pageTitle = `${item.title} | 이창준 Portfolio`;
+  const pageUrl = absoluteUrl(`project.html?work=${encodeURIComponent(item.slug)}`);
+  const pageDescription = `${item.title} · ${item.summary || ""}`.trim();
+
+  document.title = pageTitle;
+
+  const canonical = document.head.querySelector("link[rel='canonical']");
+  if (canonical) {
+    canonical.href = pageUrl;
+  }
+  setMetaContent("meta[name='description']", pageDescription);
+  setMetaContent("meta[property='og:title']", pageTitle);
+  setMetaContent("meta[property='og:url']", pageUrl);
+  setMetaContent("meta[property='og:description']", pageDescription);
+  setMetaContent("meta[property='og:image']", item.image && absoluteUrl(item.image));
   setText("[data-project-title]", item.title);
   setText("[data-project-summary]", item.summary);
   setText("[data-project-role]", item.role);

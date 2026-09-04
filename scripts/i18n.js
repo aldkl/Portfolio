@@ -57,11 +57,13 @@
 
   const updateButtons = () => {
     document.documentElement.lang = currentLanguage;
+    const dictionary = dictionaries[currentLanguage] || {};
     document.title = currentLanguage === "ko"
       ? originalDocumentTitle
-      : originalDocumentTitle
+      : dictionary[originalDocumentTitle]
+        || originalDocumentTitle
           .split(" | ")
-          .map((part) => (dictionaries[currentLanguage] && dictionaries[currentLanguage][part]) || part)
+          .map((part) => dictionary[part] || part)
           .join(" | ");
     document.querySelectorAll("[data-language]").forEach((button) => {
       const active = button.dataset.language === currentLanguage;

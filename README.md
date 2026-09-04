@@ -18,3 +18,9 @@ GitHub Pages로 배포할 정적 포트폴리오 사이트입니다.
 새 항목은 `window.PORTFOLIO_ITEMS` 배열에 객체를 하나 더 추가하면 됩니다. `category`는 `project`,
 `freelance`, `study` 중 하나를 사용하고, 상세 페이지에서 보여줄 사진은 `gallery` 배열에 경로를
 추가합니다.
+
+## 검색 노출
+
+- 색인용 파일: `sitemap.xml`, `robots.txt`
+- 프로젝트를 추가하거나 삭제한 뒤에는 `python scripts/generate-sitemap.py`를 실행해 `sitemap.xml`을 다시 만듭니다.
+- Google Search Console, Bing, 네이버 서치어드바이저 등록 절차는 `docs/seo-checklist.md`에 정리했습니다.

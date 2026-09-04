@@ -28,6 +28,8 @@ SOURCE_FILES = [
 KOREAN = re.compile(r"[가-힣]")
 STRING = re.compile(r'"((?:\\.|[^"\\])*)"', re.DOTALL)
 TEMPLATE_LITERAL = re.compile(r"`(?:\\.|[^`\\])*`", re.DOTALL)
+# 구조화 데이터(JSON-LD) 같은 인라인 스크립트는 화면에 보이는 문구가 아니므로 제외한다.
+INLINE_SCRIPT = re.compile(r"<script[^>]*>.*?</script>", re.DOTALL | re.IGNORECASE)
 POLISH = {
     "en": {
         "Chungkang University of Cultural Industries": "Chungkang College of Cultural Industries",
@@ -41,6 +43,10 @@ POLISH = {
 }
 MANUAL_TRANSLATIONS = {
     "en": {
+        "이창준 Portfolio | Unity 게임 개발자 · 테크니컬 아티스트":
+            "Changjun Lee Portfolio | Unity Game Developer & Technical Artist",
+        "게임 개발자 · 테크니컬 아티스트 이창준의 포트폴리오입니다. Unity와 Unreal 기반 게임 프로그래밍, URP 쉐이더, 이펙트, 모델링, 애니메이션 작업을 정리했습니다.":
+            "The portfolio of Changjun Lee, a game developer and technical artist, covering Unity and Unreal game programming, URP shaders, VFX, modeling, and animation.",
         "공격 콤보 · 애니메이션 클립 이벤트로 입력 구간 제어":
             "Attack Combos: Driving the Input Window from Animation Clip Events",
         "콤보 입력을 받는 구간의 시작과 끝을 공격 애니메이션 클립에 이벤트로 심었습니다. 입력 구간이 열려 있는 동안 공격 키를 누르면 다음 콤보를 예약해 두고, 클립 뒤쪽에 심어 둔 이벤트가 예약된 공격을 바로 이어서 재생합니다. 경과 시간 대신 클립 이벤트를 기준으로 삼았기 때문에 애니메이션 길이가 바뀌어도 코드에서 타이밍 값을 다시 맞출 필요가 없습니다. 대쉬 중이거나 Spline 이동 중일 때는 입력 자체를 받지 않도록 막았습니다.":
@@ -127,6 +133,10 @@ MANUAL_TRANSLATIONS = {
             "Character left/right direction switching with the Blend Tree applied",
     },
     "ja": {
+        "이창준 Portfolio | Unity 게임 개발자 · 테크니컬 아티스트":
+            "イ・チャンジュン Portfolio | Unity ゲーム開発者・テクニカルアーティスト",
+        "게임 개발자 · 테크니컬 아티스트 이창준의 포트폴리오입니다. Unity와 Unreal 기반 게임 프로그래밍, URP 쉐이더, 이펙트, 모델링, 애니메이션 작업을 정리했습니다.":
+            "ゲーム開発者・テクニカルアーティスト、イ・チャンジュンのポートフォリオです。UnityとUnrealでのゲームプログラミング、URPシェーダー、エフェクト、モデリング、アニメーションの作業をまとめました。",
         "공격 콤보 · 애니메이션 클립 이벤트로 입력 구간 제어":
             "攻撃コンボ・アニメーションクリップのイベントで入力受付区間を制御",
         "콤보 입력을 받는 구간의 시작과 끝을 공격 애니메이션 클립에 이벤트로 심었습니다. 입력 구간이 열려 있는 동안 공격 키를 누르면 다음 콤보를 예약해 두고, 클립 뒤쪽에 심어 둔 이벤트가 예약된 공격을 바로 이어서 재생합니다. 경과 시간 대신 클립 이벤트를 기준으로 삼았기 때문에 애니메이션 길이가 바뀌어도 코드에서 타이밍 값을 다시 맞출 필요가 없습니다. 대쉬 중이거나 Spline 이동 중일 때는 입력 자체를 받지 않도록 막았습니다.":
@@ -227,6 +237,7 @@ def collect_source_copy():
     for path in SOURCE_FILES:
         source = path.read_text(encoding="utf-8")
         if path.suffix == ".html":
+            source = INLINE_SCRIPT.sub("", source)
             parser = VisibleTextParser()
             parser.feed(source)
             values.update(parser.values)

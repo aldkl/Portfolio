@@ -1,0 +1,8 @@
+# GitHub Pages 프로젝트 사이트라 크롤러가 실제로 읽는 robots.txt는
+# https://aldkl.github.io/robots.txt 입니다. 이 파일은 커스텀 도메인을
+# 연결했을 때를 대비한 사본이며, 색인은 Search Console에서 sitemap.xml을
+# 직접 제출해 진행합니다.
+User-agent: *
+Allow: /
+
+Sitemap: https://aldkl.github.io/Portfolio/sitemap.xml
