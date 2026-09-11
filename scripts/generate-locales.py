@@ -43,6 +43,54 @@ POLISH = {
 }
 MANUAL_TRANSLATIONS = {
     "en": {
+        "AI 활용":
+            "AI Usage",
+        "AI 활용 방법":
+            "How I Use AI",
+        "운영 중":
+            "Live",
+        "기획·사양 작성":
+            "Planning & specification",
+        "검증·테스트":
+            "Verification & testing",
+        "AI 지시":
+            "AI direction",
+        "에이전트 운영 규칙 작성":
+            "Agent operating rules",
+        "검증·배포 확인":
+            "Verification & deployment checks",
+        "3. AI 제안을 검증하고 반려하기":
+            "3. Verifying and Rejecting AI Proposals",
+        "실제 반려·수정 지시 기록":
+            "Actual rejection and correction instructions",
+        "4. 실기 테스트 결과를 다음 지시로 연결":
+            "4. Feeding Real Test Results into the Next Instruction",
+        "한글 자소 분해 유사도 · OCR 오타에 강한 기술명 매칭":
+            "Hangul Jamo Decomposition Similarity · Move-Name Matching Robust to OCR Errors",
+        "정화 연출 · 흑백 세계가 색을 되찾는 쉐이더":
+            "Purification Effect · A Shader That Restores Color to a Monochrome World",
+        "강물 쉐이더 · 거리 필드 기반 가장자리 거품":
+            "River Shader · Distance-Field Edge Foam",
+        "폭발 열매 · 쉐이더와 C++를 함께 만든 연출":
+            "Explosion Fruit · Shader and C++ Built Together",
+        "가열 타이머 · 익음과 탐을 두 단계 코루틴으로 처리":
+            "Heating Timer · Cooked and Burnt States as a Two-Stage Coroutine",
+        "손님별 재료 배치 · 테이블 한 장으로 난이도 조절":
+            "Per-Customer Ingredient Placement · Difficulty Tuned from a Single Table",
+        "GameManager.cs · 손님 인덱스 기준 재료 배치 테이블":
+            "GameManager.cs · Ingredient placement table by customer index",
+        "XR 연동 · 서빙 순간 물리와 그랩을 정리":
+            "XR Integration · Tearing Down Physics and Grab on Serve",
+        "애니메이션 이름 규칙 · 접두사와 접미사의 조합":
+            "Animation Naming Rule · Prefix and Suffix Combination",
+        "게임 화면을 캡처해 OCR로 읽고, 상대 포켓몬에 대한 내 기술의 타입 상성을 실시간으로 표시하는 데스크톱 도구입니다.":
+            "A desktop tool that captures the game screen, reads it with OCR, and shows in real time how effective each of my moves is against the opponent's Pokemon.",
+        "메이플스토리 캐릭터의 주간 보스 수익과 사냥 수익을 계산하고 일·주·월 숙제를 관리하는 웹 앱입니다. GitHub Pages와 Vercel 서버리스로 운영 중입니다.":
+            "A web app that calculates weekly boss and hunting income for MapleStory characters and tracks daily, weekly, and monthly tasks. It runs on GitHub Pages and Vercel serverless.",
+        "개인 프로젝트 · NEXON Open API 기반 캐릭터 수익·숙제 정산 웹 앱":
+            "Personal project · NEXON Open API-based character income and task tracker web app",
+        "AI 코딩 도구에 작업 규칙과 검증 절차를 문서로 정해 두고, 설계와 검토는 직접 맡으면서 구현 속도를 높인 프로젝트입니다.":
+            "Projects where I documented working rules and verification steps for AI coding tools, kept design and review in my own hands, and sped up implementation.",
         "이창준 Portfolio | Unity 게임 개발자 · 테크니컬 아티스트":
             "Changjun Lee Portfolio | Unity Game Developer & Technical Artist",
         "게임 개발자 · 테크니컬 아티스트 이창준의 포트폴리오입니다. Unity와 Unreal 기반 게임 프로그래밍, URP 쉐이더, 이펙트, 모델링, 애니메이션 작업을 정리했습니다.":
@@ -133,6 +181,40 @@ MANUAL_TRANSLATIONS = {
             "Character left/right direction switching with the Blend Tree applied",
     },
     "ja": {
+        "AI 활용 방법":
+            "AI活用方法",
+        "운영 중":
+            "運用中",
+        "에이전트 운영 규칙 작성":
+            "エージェント運用ルールの作成",
+        "검증·배포 확인":
+            "検証・デプロイ確認",
+        "3. AI 제안을 검증하고 반려하기":
+            "3. AI提案を検証して差し戻す",
+        "실제 반려·수정 지시 기록":
+            "実際の差し戻し・修正指示の記録",
+        "4. 실기 테스트 결과를 다음 지시로 연결":
+            "4. 実機テストの結果を次の指示につなげる",
+        "한글 자소 분해 유사도 · OCR 오타에 강한 기술명 매칭":
+            "ハングル字母分解の類似度 · OCR誤認識に強い技名マッチング",
+        "pokemon_battle_lens.py · 자소 분해와 유사도 기반 편집 거리":
+            "pokemon_battle_lens.py · 字母分解と類似度ベースの編集距離",
+        "1. AGENTS.md로 에이전트 운영 규칙을 성문화":
+            "1. AGENTS.mdでエージェント運用ルールを明文化",
+        "강물 쉐이더 · 거리 필드 기반 가장자리 거품":
+            "川シェーダー · 距離フィールドに基づくエッジフォーム",
+        "폭발 열매 · 쉐이더와 C++를 함께 만든 연출":
+            "爆発の実 · シェーダーとC++を一緒に作った演出",
+        "가열 타이머 · 익음과 탐을 두 단계 코루틴으로 처리":
+            "加熱タイマー · 焼き上がりと焦げを2段階コルーチンで処理",
+        "CharacterControl.cs · 눈 플래그 토글과 상태 유도":
+            "CharacterControl.cs · 目フラグの切り替えと状態の導出",
+        "게임 화면을 캡처해 OCR로 읽고, 상대 포켓몬에 대한 내 기술의 타입 상성을 실시간으로 표시하는 데스크톱 도구입니다.":
+            "ゲーム画面をキャプチャしてOCRで読み取り、相手ポケモンに対する自分の技のタイプ相性をリアルタイムで表示するデスクトップツールです。",
+        "메이플스토리 캐릭터의 주간 보스 수익과 사냥 수익을 계산하고 일·주·월 숙제를 관리하는 웹 앱입니다. GitHub Pages와 Vercel 서버리스로 운영 중입니다.":
+            "メイプルストーリーのキャラクターの週間ボス収益と狩り収益を計算し、日・週・月の課題を管理するウェブアプリです。GitHub PagesとVercelサーバーレスで運用中です。",
+        "개인 프로젝트 · NEXON Open API 기반 캐릭터 수익·숙제 정산 웹 앱":
+            "個人プロジェクト · NEXON Open APIベースのキャラクター収益・課題管理ウェブアプリ",
         "이창준 Portfolio | Unity 게임 개발자 · 테크니컬 아티스트":
             "イ・チャンジュン Portfolio | Unity ゲーム開発者・テクニカルアーティスト",
         "게임 개발자 · 테크니컬 아티스트 이창준의 포트폴리오입니다. Unity와 Unreal 기반 게임 프로그래밍, URP 쉐이더, 이펙트, 모델링, 애니메이션 작업을 정리했습니다.":

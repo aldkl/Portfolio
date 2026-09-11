@@ -881,6 +881,24 @@ h3 {
   color: #285f91;
 }
 
+.tag-list li.tag--ai {
+  background: #fdeef7;
+  color: #8a2f6a;
+}
+
+.tag-list li.tag-value--python,
+.tag-list li.tag-value--javascript,
+.tag-list li.tag-value--web,
+.tag-list li.tag-value--desktop,
+.tag-list li.tag-value--ocr {
+  background: #eef1f6;
+  color: #3d4a63;
+}
+
+.section-intro {
+  margin: -8px 0 28px;
+}
+
 .tag-list--detail {
   margin-bottom: 18px;
 }

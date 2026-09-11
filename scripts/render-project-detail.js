@@ -238,7 +238,16 @@
   if (specs) {
     specs.replaceChildren();
     [
-      ["구분", item.category === "freelance" ? "외주 작업" : item.category === "study" ? "학교 과제 및 기타" : "프로젝트"],
+      [
+        "구분",
+        item.category === "freelance"
+          ? "외주 작업"
+          : item.category === "study"
+            ? "학교 과제 및 기타"
+            : item.category === "ai"
+              ? "AI 활용"
+              : "프로젝트",
+      ],
       ["개발여부", item.status],
       ["담당 파트", item.parts ? item.parts.join(", ") : ""],
       ["개발목적", item.purpose],
@@ -260,6 +269,12 @@
     mediaRow.className = "detail-hero__media-row";
     mediaRow.append(links, specs);
     heroInner.append(mediaRow);
+  }
+
+  const backLink = document.querySelector(".back-link");
+  if (backLink) {
+    const sectionIds = { ai: "ai-usage", freelance: "freelance", study: "studies" };
+    backLink.href = `index.html#${sectionIds[item.category] || "projects"}`;
   }
 
   const content = document.querySelector("[data-project-content]");

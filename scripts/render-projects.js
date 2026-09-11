@@ -1,6 +1,7 @@
 (function () {
   const groups = {
     project: window.PORTFOLIO_PROJECTS || [],
+    ai: window.PORTFOLIO_AI || [],
     freelance: window.PORTFOLIO_FREELANCE || [],
     study: window.PORTFOLIO_STUDIES || [],
   };

@@ -169,6 +169,47 @@ window.PORTFOLIO_ITEMS = [
     ],
   },
   {
+    category: "ai",
+    slug: "pokemon-battle-lens",
+    title: "Pokemon Battle Lens",
+    status: "개발완료",
+    tags: ["AI", "Codex", "Python", "OCR", "Desktop"],
+    purpose: "개인 프로젝트 · AI 코딩 에이전트와 함께 만든 OCR 기반 배틀 보조 도구",
+    period: "2026.04.26 ~ 2026.04.28",
+    team: "1명 + Codex CLI",
+    parts: ["기획·사양 작성", "검증·테스트", "AI 지시"],
+    summary: "게임 화면을 캡처해 OCR로 읽고, 상대 포켓몬에 대한 내 기술의 타입 상성을 실시간으로 표시하는 데스크톱 도구입니다.",
+    role: "코드를 직접 작성하는 대신 요구사항과 구조 제약을 사양서로 정리해 Codex CLI에 전달하고, 3일 동안 72번의 지시와 실기 테스트로 3,500줄 규모의 Python 앱을 완성했습니다. OCR 오인식 원인 분석은 읽기 전용 에이전트 5개를 병렬로 돌려 조사하게 했고, AI가 제안한 방향 중 맞지 않는 것은 반려하며 제품 판단은 직접 내렸습니다.",
+    problem: "Tesseract가 게임 도트 폰트의 한글 기술명과 레벨 숫자를 자주 틀리게 읽었고, 900개가 넘는 기술을 템플릿 매칭으로 바꾸자는 AI 제안은 규모상 맞지 않았습니다.",
+    solution: "흰 글자만 남기는 전처리, 한글 자소 분해 유사도 매칭, 7세그먼트 형태 기반 숫자 분류기처럼 판독 알고리즘을 강화하는 방향으로 지시를 바꿨고, 결과를 실제 게임 화면으로 검증하며 반복했습니다.",
+    learned: "AI에게 맡길수록 사람은 사양, 검증, 범위 판단에 집중해야 하며, 병렬 분석 에이전트와 수정 권한을 분리하면 조사 속도와 안정성을 함께 얻을 수 있다는 점을 배웠습니다.",
+    image: "assets/portfolio/pokemon-battle-lens.png",
+    gallery: ["assets/portfolio/pokemon-battle-lens.png"],
+    links: [{ label: "GitHub", url: "https://github.com/aldkl/PokemonBattleLens" }],
+  },
+  {
+    category: "ai",
+    slug: "maple-alim",
+    title: "메이플 플랜 (MapleAlim)",
+    status: "운영 중",
+    tags: ["AI", "Codex", "Python", "JavaScript", "Web"],
+    purpose: "개인 프로젝트 · NEXON Open API 기반 캐릭터 수익·숙제 정산 웹 앱",
+    period: "2026.07.06 ~ 2026.08.27",
+    team: "1명 + Codex CLI",
+    parts: ["기획", "에이전트 운영 규칙 작성", "검증·배포 확인"],
+    summary: "메이플스토리 캐릭터의 주간 보스 수익과 사냥 수익을 계산하고 일·주·월 숙제를 관리하는 웹 앱입니다. GitHub Pages와 Vercel 서버리스로 운영 중입니다.",
+    role: "AGENTS.md에 에이전트가 지켜야 할 규칙을 문서로 정하고, 매 세션의 요청·변경·검증·남은 일을 날짜별 Markdown으로 백업하게 해서 AI의 세션 간 기억 단절을 파일 기반 컨텍스트로 대체했습니다. 게임 수익 공식과 초기화 주기 같은 도메인 판단은 직접 내리고, 구현·리서치·배포 확인은 Codex CLI가 반복 루프로 수행하도록 운영했습니다.",
+    problem: "AI 코딩 에이전트는 세션이 바뀌면 이전 결정과 남은 작업을 잊어버렸고, 정적 호스팅에서는 API 키를 숨길 수 없어 프론트와 백엔드를 어떻게 나눌지도 정해야 했습니다.",
+    solution: "작업 시작 시 백업 문서를 먼저 읽고 종료 시 갱신하는 규칙을 AGENTS.md에 넣었고, API 키는 Vercel 환경변수에만 두고 GitHub Pages 프론트가 서버리스 함수를 호출하는 구조로 분리했습니다.",
+    learned: "AI와 오래 협업하는 프로젝트에서는 코드보다 규칙 문서와 작업 기록이 품질을 좌우하며, 비밀정보 취급과 검증 절차를 규칙으로 성문화해야 안심하고 맡길 수 있다는 점을 배웠습니다.",
+    image: "assets/portfolio/maple-alim.png",
+    gallery: ["assets/portfolio/maple-alim.png"],
+    links: [
+      { label: "사이트", url: "https://aldkl.github.io/MapleAlim/" },
+      { label: "GitHub", url: "https://github.com/aldkl/MapleAlim" },
+    ],
+  },
+  {
     category: "freelance",
     slug: "capstone-lighting",
     title: "캡스톤Lighting",
@@ -426,5 +467,6 @@ window.PORTFOLIO_ITEMS = [
 ];
 
 window.PORTFOLIO_PROJECTS = window.PORTFOLIO_ITEMS.filter((item) => item.category === "project");
+window.PORTFOLIO_AI = window.PORTFOLIO_ITEMS.filter((item) => item.category === "ai");
 window.PORTFOLIO_FREELANCE = window.PORTFOLIO_ITEMS.filter((item) => item.category === "freelance");
 window.PORTFOLIO_STUDIES = window.PORTFOLIO_ITEMS.filter((item) => item.category === "study");
