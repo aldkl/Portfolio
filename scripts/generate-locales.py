@@ -43,6 +43,36 @@ POLISH = {
 }
 MANUAL_TRANSLATIONS = {
     "en": {
+        "사용 중":
+            "In use",
+        "실기 테스트":
+            "Hands-on testing",
+        "설계 결정":
+            "Design decisions",
+        "요구사항 정의":
+            "Requirements definition",
+        "프로젝트 폴더 · MaxScript 7개":
+            "Project folder · 7 MaxScript files",
+        "3. SkinSelectTools · 본 축을 아는 스킨 정점 선택":
+            "3. SkinSelectTools · Bone-Axis-Aware Skin Vertex Selection",
+        "검증 수치 · 팔뚝 정점 539 기준":
+            "Verification numbers · from forearm vertex 539",
+        "BipedKeyDiagnose.ms · 호출이 안 던진 것과 키가 생긴 것은 다르다":
+            "BipedKeyDiagnose.ms · A call that did not throw is not the same as a key being created",
+        "5. BipedQuickTools · Biped 전체 키 찍기 / 지우기 / COM 선택":
+            "5. BipedQuickTools · Set / Delete All Biped Keys, Select COM",
+        "본 세트 미러 · 복제 후 바깥 참조만 고치기":
+            "Bone Set Mirror · Clone, Then Fix Only Outward References",
+        "키 미러 · Paste Opposite를 여러 본, 여러 키에 한 번에":
+            "Key Mirror · Paste Opposite for Many Bones and Keys at Once",
+        "MirrorRigTools.ms · 쓰기 전에 한 번 읽어 Biped 내부 상태를 맞춘다":
+            "MirrorRigTools.ms · Read once before writing to sync the Biped internal state",
+        "7. 헤드리스 자동 테스트 · 241개 검사":
+            "7. Headless Automated Test · 241 Checks",
+        "개인 프로젝트 · 자작 캐릭터 리깅 중 3ds Max에 없거나 잘못 동작하는 기능을 MaxScript 도구 7개로 보완":
+            "Personal project · 7 MaxScript tools that fill in features 3ds Max lacks or gets wrong during character rigging",
+        "Biped 캐릭터 리그를 만들며 부딪힌 문제를 MaxScript 도구로 해결한 모음입니다. 이름 바꾸기와 박스 표시 단축키부터 본 축을 아는 스킨 정점 선택, Biped 전체 키 찍기, 보조 본·스킨 웨이트·키의 좌우 미러까지 7개 스크립트이고, 헤드리스 3ds Max에서 241개 자동 검사를 통과했습니다.":
+            "A set of MaxScript tools written to solve problems I hit while building a Biped character rig. Seven scripts range from rename and box-display shortcuts to bone-axis-aware skin vertex selection, keying the whole Biped, and mirroring helper bones, skin weights, and keys, and they passed 241 automated checks in headless 3ds Max.",
         "AI 활용":
             "AI Usage",
         "AI 활용 방법":
@@ -181,6 +211,24 @@ MANUAL_TRANSLATIONS = {
             "Character left/right direction switching with the Blend Tree applied",
     },
     "ja": {
+        "3. SkinSelectTools · 본 축을 아는 스킨 정점 선택":
+            "3. SkinSelectTools · ボーン軸を知るスキン頂点選択",
+        "SkinSelectTools.ms · 본 축 각도로 엣지를 나누고 방향을 유지하며 걷기":
+            "SkinSelectTools.ms · ボーン軸の角度でエッジを分け、方向を保ちながら歩く",
+        "4. BipedKeyDiagnose · '왜 키가 안 들어가지'를 측정하는 진단기":
+            "4. BipedKeyDiagnose · 「なぜキーが入らないのか」を測定する診断ツール",
+        "BipedKeyDiagnose.ms · 호출이 안 던진 것과 키가 생긴 것은 다르다":
+            "BipedKeyDiagnose.ms · 呼び出しが例外を投げなかったことと、キーが生成されたことは別",
+        "5. BipedQuickTools · Biped 전체 키 찍기 / 지우기 / COM 선택":
+            "5. BipedQuickTools · Biped全キー打ち / 削除 / COM選択",
+        "본 세트 미러 · 복제 후 바깥 참조만 고치기":
+            "ボーンセットのミラー · 複製後に外部参照だけ修正",
+        "키 미러 · Paste Opposite를 여러 본, 여러 키에 한 번에":
+            "キーミラー · Paste Oppositeを複数ボーン・複数キーに一括で",
+        "7. 헤드리스 자동 테스트 · 241개 검사":
+            "7. ヘッドレス自動テスト · 241項目の検査",
+        "Biped 캐릭터 리그를 만들며 부딪힌 문제를 MaxScript 도구로 해결한 모음입니다. 이름 바꾸기와 박스 표시 단축키부터 본 축을 아는 스킨 정점 선택, Biped 전체 키 찍기, 보조 본·스킨 웨이트·키의 좌우 미러까지 7개 스크립트이고, 헤드리스 3ds Max에서 241개 자동 검사를 통과했습니다.":
+            "Bipedキャラクターリグを作りながらぶつかった問題をMaxScriptツールで解決した集まりです。リネームとボックス表示のショートカットから、ボーン軸を知るスキン頂点選択、Biped全キー打ち、補助ボーン・スキンウェイト・キーの左右ミラーまで7本のスクリプトで、ヘッドレス3ds Maxで241項目の自動検査に合格しました。",
         "AI 활용 방법":
             "AI活用方法",
         "운영 중":

@@ -148,7 +148,7 @@ a {
 .hero--profile .hero__media img {
   aspect-ratio: 4 / 5;
   min-height: auto;
-  object-position: 62% 46%;
+  object-position: 50% 40%;
 }
 
 .hero__content {
@@ -888,6 +888,9 @@ h3 {
 
 .tag-list li.tag-value--python,
 .tag-list li.tag-value--javascript,
+.tag-list li.tag-value--maxscript,
+.tag-list li.tag-value--3ds-max,
+.tag-list li.tag-value--rigging,
 .tag-list li.tag-value--web,
 .tag-list li.tag-value--desktop,
 .tag-list li.tag-value--ocr {

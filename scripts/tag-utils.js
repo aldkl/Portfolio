@@ -8,7 +8,7 @@
     },
     { className: "tag--engine", tags: ["Unity", "Unreal", "OpenGL", "URP", "Built-in", "Forward", "Deferred"] },
     { className: "tag--tech", tags: ["Shader", "Lighting", "VFX", "Tool", "Editor", "UV", "Texture", "Water", "VRC"] },
-    { className: "tag--ai", tags: ["AI", "Claude Code", "Codex", "Cursor", "Python", "JavaScript", "Web", "Desktop", "OCR"] },
+    { className: "tag--ai", tags: ["AI", "Claude Code", "Codex", "Cursor", "Python", "JavaScript", "MaxScript", "3ds Max", "Rigging", "Web", "Desktop", "OCR"] },
   ];
 
   const slugifyTag = (tag) =>
