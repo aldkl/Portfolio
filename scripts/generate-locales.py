@@ -43,6 +43,8 @@ POLISH = {
 }
 MANUAL_TRANSLATIONS = {
     "en": {
+        "맥스 스크립트 (Lia Rig Tools)":
+            "MaxScript Tools (Lia Rig Tools)",
         "사용 중":
             "In use",
         "실기 테스트":
@@ -211,6 +213,8 @@ MANUAL_TRANSLATIONS = {
             "Character left/right direction switching with the Blend Tree applied",
     },
     "ja": {
+        "맥스 스크립트 (Lia Rig Tools)":
+            "MaxScript (Lia Rig Tools)",
         "3. SkinSelectTools · 본 축을 아는 스킨 정점 선택":
             "3. SkinSelectTools · ボーン軸を知るスキン頂点選択",
         "SkinSelectTools.ms · 본 축 각도로 엣지를 나누고 방향을 유지하며 걷기":

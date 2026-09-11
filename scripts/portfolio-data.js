@@ -212,7 +212,7 @@ window.PORTFOLIO_ITEMS = [
   {
     category: "ai",
     slug: "lia-rig-tools",
-    title: "3ds Max 리깅 툴셋 (Lia Rig Tools)",
+    title: "맥스 스크립트 (Lia Rig Tools)",
     status: "사용 중",
     tags: ["AI", "Claude Code", "MaxScript", "3ds Max", "Rigging", "Tool"],
     purpose: "개인 프로젝트 · 자작 캐릭터 리깅 중 3ds Max에 없거나 잘못 동작하는 기능을 MaxScript 도구 7개로 보완",
