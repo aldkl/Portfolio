@@ -1453,191 +1453,81 @@ return todos;` },
     { type: "p", text: "AGENTS.md와 작업 기록을 저장소 밖에 두어서 공개 저장소만 봐서는 AI 협업 방식이 드러나지 않습니다. 비밀정보가 없는 규칙 문서는 공개해도 되었을 것이고, 다음 프로젝트에서는 규칙과 기록의 공개 범위를 처음부터 나눠 둘 생각입니다. 단일 HTML 파일 구조는 배포가 쉬웠지만 5,000줄을 넘기면서 에이전트의 수정 범위가 넓어져, 화면 단위 분리를 더 일찍 지시했어야 했습니다." },
   ],
   "lia-rig-tools": [
-    { type: "h3", text: "작업 환경과 공통 구조" },
-    { type: "p", text: "3ds Max 2026에서 자작 캐릭터 '리아'의 리그를 만들며 진행했습니다. 리그는 Biped(Bip001 아래 195 노드)에 트위스트·소매·귀·치마 보조 본과 스킨 메시 31개가 붙어 있습니다. 모든 도구는 같은 패턴을 따릅니다. macroScript를 Custom Tools 카테고리에 등록하고, 파일을 scripts\\startup 폴더에 두어 Max가 켜질 때 로드되게 하며, 단축키는 Hotkey Editor에서 붙입니다." },
-    { type: "p", text: "검증은 3dsmaxbatch로 헤드리스 실행했습니다. -sceneFile 옵션으로 리그를 넘기면 시작 전에 크래시하지만, 스크립트 안에서 loadMaxFile을 부르면 정상 로드된다는 것을 확인해 실제 리그 위에서 자동 테스트를 돌릴 수 있게 되었습니다. 작업 순서는 QuickRename → DisplayAsBox → BipedKeyDiagnose → BipedQuickTools → SkinSelectTools → MirrorRigTools와 테스트였습니다." },
-    { type: "code", lang: "text", caption: "프로젝트 폴더 · MaxScript 7개", text: `QuickRename.ms          선택 오브젝트 이름 바꾸기 (F2)
-DisplayAsBox.ms         Display as Box 토글 (단축키 없음 → 매크로)
+    { type: "h3", text: "설치와 공통 사용법" },
+    { type: "p", text: "3ds Max 2026용 MaxScript 7개입니다. 파일을 scripts\\startup 폴더에 넣고 Max를 다시 켜면 자동으로 로드되고, 모든 도구는 Customize > Hotkey Editor의 Custom Tools 카테고리에서 단축키를 붙일 수 있습니다. 한 번만 쓰려면 Scripting > Run Script로 파일을 실행해도 됩니다. 모든 작업은 undo 한 단계로 되돌릴 수 있습니다." },
+    { type: "code", lang: "text", caption: "도구 목록", text: `QuickRename.ms          선택 오브젝트 이름 바꾸기 (F2)
+DisplayAsBox.ms         Display as Box 토글
 SkinSelectTools.ms      본 축 기준 스킨 정점 Ring / Along / Step
 BipedKeyDiagnose.ms     Biped 키 방법별 진단 리포트
-BipedQuickTools.ms      Biped 전체 키 찍기/지우기, COM 선택, 쿼드 메뉴
+BipedQuickTools.ms      Biped 전체 키 찍기 / 지우기, COM 선택
 MirrorRigTools.ms       본 미러 · 스킨 웨이트 미러 · 대칭 검사 · 키 미러
-MirrorRigTools_test.ms  3dsmaxbatch 자동 테스트 (241 검사)` },
+MirrorRigTools_test.ms  3dsmaxbatch 자동 테스트` },
 
-    { type: "h3", text: "AI 협업 방식" },
-    { type: "p", text: "코드는 전부 Claude Code가 작성했고, 저는 3ds Max 안에서 실제로 무엇이 불편한지와 결과가 맞는지를 되돌려 주었습니다. '창 안 나와', '혹시 모르니까 백업에서 테스트해', '그 방식은 문제 생기기 쉬워', 'Test animation은 완전 날려줘' 같은 피드백이 그대로 설계 결정이 되었습니다." },
-    { type: "p", text: "AI가 API 문서를 믿고 쓴 코드가 실제 리그에서 다르게 동작하는 일이 반복되었습니다. 컨트롤러 클래스 이름, 틱과 프레임 단위, biped.deleteKeys의 동작, startup 폴더의 콜백 미실행, setTransform의 캐시가 그 예입니다. 그래서 모든 동작을 헤드리스 배치로 실측하고 결과를 리포트 파일로 남기는 방식으로 바꿨습니다. 이후로는 '됐다'가 아니라 '241개 중 0개 실패'로 보고받습니다. 도구마다 헤더 주석에 무엇을, 왜, 어떤 함정이 있었는지를 쓰게 해서 세션이 바뀌어도 같은 실수를 반복하지 않게 했고, 결정 기록과 사용법은 별도 Markdown으로 관리합니다." },
+    { type: "h3", text: "Quick Rename · 선택한 오브젝트 이름 바꾸기" },
+    { type: "p", text: "오브젝트를 선택하고 F2를 누르면 미리보기가 있는 이름 바꾸기 창이 뜹니다. 기본 이름, 접두·접미, 찾기/바꾸기, 앞뒤 글자 잘라내기, 번호 시작·간격·자릿수, 정렬 순서(씬 순서, 이름, X·Y·Z 위치, 생성 순서)를 정할 수 있습니다. 기본 이름 안에 #을 넣으면 그 자리에 그 개수만큼의 자릿수로 번호가 들어갑니다. 예를 들어 Box_##은 Box_01, Box_02가 됩니다. 창을 띄운 채 선택을 바꾸면 미리보기가 따라오고, 기본 이름 칸에서 Enter를 치면 바로 적용됩니다." },
 
-    { type: "h3", text: "1. QuickRename · 선택한 것을 바로 이름 바꾸기" },
-    { type: "p", text: "F2를 누르면 현재 선택된 오브젝트의 이름을 미리보기와 함께 바꾸는 대화창이 뜹니다. 기본 이름, 접두·접미, 찾기/바꾸기, 앞뒤 글자 잘라내기, 번호 시작·간격·자릿수, 정렬 순서(씬 순서, 이름, X·Y·Z 위치, 생성 순서)를 지원합니다." },
-    { type: "p", text: "Max의 Rename Objects는 번호 자릿수가 3자리로 고정되어 있는데, 리아 파이프라인의 규칙은 2자리입니다. 기본 이름 안에 #을 넣으면 그 자리에 그 개수만큼의 자릿수로 번호가 들어가게 해서 규칙이 바뀌어도 대응할 수 있게 했습니다. 모든 컨트롤의 changed 이벤트가 미리보기를 갱신하고, selectionSetChanged 콜백으로 창을 띄운 채 선택을 바꿔도 미리보기가 따라옵니다. 적용은 undo 한 단계입니다." },
-    { type: "code", lang: "maxscript", caption: "QuickRename.ms · # 묶음이 번호 자리와 자릿수를 정한다", text: `-- 기본 이름 안의 '#' 묶음이 번호 자리와 자릿수를 정한다: qrHash "Box_##" 3 -> "Box_03"
-fn qrHash str num =
-(
-    local i = findString str "#"
-    if i == undefined then undefined
-    else
-    (
-        local j = i
-        while j <= str.count and str[j] == "#" do j += 1
-        (substring str 1 (i - 1)) + (qrPad num (j - i)) + (substring str j -1)
-    )
-)` },
-    { type: "p", text: "MaxScript에서는 같은 스코프의 로컬 함수가 서로를 호출할 수 없어서 도우미 함수들을 전역으로 선언하고 매크로 실행마다 다시 정의합니다. 이후의 모든 도구가 접두사를 붙인 전역 함수 구조를 따릅니다." },
+    { type: "h3", text: "Display as Box · 박스 표시 토글" },
+    { type: "p", text: "Custom Tools 카테고리에 Display as Box와 Display as Box + Children 두 매크로가 등록됩니다. 단축키를 붙여 두고 누르면 선택 오브젝트, 또는 선택과 모든 자식의 Display as Box가 바뀝니다. 본 체인 전체를 박스로 바꿔 뷰포트를 가볍게 만들 때 씁니다. 하나라도 박스가 아니면 전부 박스로 바꾸고, 전부 박스일 때만 해제하므로 섞인 상태에서 눌러도 결과가 예측 가능합니다." },
 
-    { type: "h3", text: "2. DisplayAsBox · 단축키가 없는 속성에 단축키 달기" },
-    { type: "p", text: "선택 오브젝트 또는 선택과 모든 자식의 Display as Box를 토글합니다. 이 속성은 Object Properties 안에만 있고 Hotkey Editor에 액션이 없어서 매크로로 감싸야만 단축키를 붙일 수 있습니다. 단순 반전이 아니라 하나라도 박스가 아니면 전부 박스로, 전부 박스일 때만 해제하는 스마트 토글이라 섞인 상태에서 눌러도 결과가 예측 가능합니다. 자식 순회는 매크로 스코프의 중첩 함수가 바깥 변수를 볼 수 없어 재귀 대신 큐로 돌립니다." },
-    { type: "code", lang: "maxscript", caption: "DisplayAsBox.ms · 섞인 상태에서도 결과가 예측 가능한 토글", text: `local allOn = true
-for o in objs while allOn do if not o.boxmode do allOn = false
-local state = not allOn
-undo "Display as Box" on ( for o in objs do if isValidNode o do o.boxmode = state )` },
+    { type: "h3", text: "Skin Select Tools · 본 축 기준 스킨 정점 선택" },
+    { type: "p", text: "Max가 켜지면 패널이 자동으로 열립니다. 닫았으면 Skin Select Tools 매크로로 다시 열고, Skin Weight Tool + 매크로를 쓰면 Skin의 Weight Tool과 이 패널이 함께 열립니다. Skin 모디파이어에서 정점을 하나 고른 뒤 버튼을 누릅니다." },
+    { type: "code", lang: "text", caption: "버튼", text: `Ring     정점을 지나 팔다리를 감싸는 한 바퀴 띠를 선택
+Along    본 길이 방향으로 한 줄을 선택
++ / -    선택을 본 방향으로 정확히 한 엣지 위·아래로 이동
+Grow / Shrink   선택을 한 겹 넓히거나 줄임` },
+    { type: "p", text: "본 축은 패널에서 고릅니다. 선택 정점의 가중치가 가장 큰 본, Skin 목록에서 하이라이트된 본, 직접 고른 본, 월드 X·Y·Z 중 하나이며 실제 쓰인 축이 패널에 표시됩니다. Angle split은 본을 따라가는 엣지와 가로지르는 엣지를 나누는 기준 각도로 기본 45도입니다. 어깨나 엉덩이처럼 굽은 곳에서 링이 일찍 끊기면 올리고, 링이 팔 길이 방향으로 새면 내립니다. Editable Poly 메시만 지원하며, Skin과 메시의 정점 수가 다르면 이유를 알리고 멈춥니다." },
 
-    { type: "h3", text: "3. SkinSelectTools · 본 축을 아는 스킨 정점 선택" },
-    { type: "p", text: "Skin 모디파이어의 Weight Tool 옆에 두고 쓰는 패널입니다. 정점을 하나 고르고 Ring을 누르면 팔을 감싸는 한 바퀴 띠가, Along을 누르면 팔 길이 방향 한 줄이, +와 -를 누르면 선택이 본 방향으로 정확히 한 엣지 이동합니다. Skin에 내장된 Loop와 Ring은 순수 토폴로지만 보고 걷기 때문에 팔에서 감싸는 링을 원했는데 길이 방향으로 뻗어 나가는 일이 잦았습니다." },
-    { type: "p", text: "먼저 측정했습니다. 팔뚝 메시의 한 정점에 닿는 엣지 4개를 본 축과의 각도로 재 보니 5도와 11도, 86도와 90도로 갈리고 그 사이에는 아무것도 없었습니다. 45도 기준선 하나로 두 가족을 확실히 나눌 수 있다는 뜻입니다. 처음 구현은 가로지르는 엣지만 따라가는 flood fill이었는데 손을 지나 몸통까지 새서 578개 정점이 선택되었습니다. 링은 방향을 유지하는 걷기여야 했습니다. 각 정점에서 도착한 방향과 가장 잘 이어지는 엣지만 택하고 한 바퀴 돌아 닫히면 멈춥니다. 본 축은 선택 정점 가중치 최대 본, Skin 목록 본, 직접 고른 본, 월드 축 중에서 명시적으로 고르고 실제 쓰인 축을 패널에 표시합니다." },
-    { type: "code", lang: "maxscript", caption: "SkinSelectTools.ms · 본 축 각도로 엣지를 나누고 방향을 유지하며 걷기", text: `-- 엣지 하나가 본을 따라가는지(true) 가로지르는지(false)
-fn sstEdgeAlong e =
-(
-    local a = sstEV[e]
-    (acos (abs (dot (normalize (sstVP[a[2]] - sstVP[a[1]])) sstAxis))) < sstTol
-)
+    { type: "h3", text: "Biped Quick Tools · Biped 전체 키 찍기 / 지우기 / COM 선택" },
+    { type: "p", text: "뷰포트에서 Ctrl+Shift+우클릭으로 쿼드 메뉴를 열거나, Biped Quick Menu 매크로에 단축키를 붙여 마우스 위치에 같은 메뉴를 띄웁니다. 각 항목은 개별 매크로로도 등록되어 있어 툴바나 단축키에 따로 넣을 수 있습니다. 쿼드 메뉴는 Max가 시작할 때 만들어지므로 startup 폴더에 넣고 재시작해야 나타납니다." },
+    { type: "code", lang: "text", caption: "메뉴 항목", text: `Set All Keys - Biped only          선택이 속한 Biped의 모든 부위에 현재 프레임 키
+Set All Keys - Biped + Children    위와 같고, Biped 아래 링크된 소품·보조 본·헬퍼에도 PRS 키
+Delete All Keys - Biped only       모든 부위에서 현재 프레임의 키만 제거
+Delete All Keys - Biped + Children 위와 같고, 링크된 오브젝트의 PRS 키도 제거
+Select COM                         어느 부위를 잡고 있든 Bip001로 선택 이동` },
+    { type: "p", text: "상태줄에는 실제로 키가 생기거나 지워진 개수만 표시되고, 실패한 노드는 이유와 함께 Listener에 남습니다. Figure 모드가 켜져 있으면 작업 전에 알리고 멈춥니다." },
 
--- 한 엣지 링 걷기: 도착 방향과 가장 잘 이어지는 같은 가족의 엣지로 직진, 닫히면 멈춘다
-fn sstWalk startV startE wantAlong =
-(
-    local out = #{startV}
-    local curV = startV, curE = startE, guard = 0
-    while curE != 0 and guard < 20000 do
-    (
-        guard += 1
-        local nxt = sstEdgeOther curE curV
-        if out[nxt] do exit
-        out[nxt] = true
-        local dir = normalize (sstVP[nxt] - sstVP[curV])
-        local bestE = 0, bestD = 0.5
-        for e in sstVE[nxt] do
-            if e != curE and (sstEdgeAlong e) == wantAlong do
-            (
-                local d = dot (sstEdgeDirFrom e nxt) dir
-                if d > bestD do (bestD = d; bestE = e)
-            )
-        curV = nxt
-        curE = bestE
-    )
-    out
-)` },
-    { type: "code", lang: "text", caption: "검증 수치 · 팔뚝 정점 539 기준", text: `Ring        10 정점, 본 축 방향 퍼짐 2.4
-Along       42 정점, 퍼짐 62
-Step ±      정확히 1 정점 (560 / 540)
-다리 Ring   14 정점 (자동 축이 일반화됨)` },
-    { type: "p", text: "구현하며 잡은 함정도 있습니다. bitArray를 as bitarray로 변환하면 복사가 아니라 같은 객체를 돌려주어 호출자의 시드가 조용히 망가졌고, skinOps의 선택 조회와 설정이 서로 다른 컬렉션 타입을 쓰며, 스크립트로 정점을 선택한 뒤에는 skinOps.invalidate를 불러야 화면이 바뀝니다. Editable Poly만 지원하기로 했습니다. Editable Mesh는 삼각화되어 대각선이 걷기를 망치고, 리그의 스킨 메시 31개가 전부 Editable Poly라 비용이 없었습니다." },
-    { type: "p", text: "UI는 세 번 만들었습니다. 매크로만 등록한 첫 버전은 사용자가 찾을 수 없었고, 타이머로 Weight Tool 열림을 폴링한 두 번째 버전은 세션 내내 돌아가는 백그라운드 틱이라 제가 거절했습니다. 지금은 Max가 켜지면 패널이 그냥 열려 있고, 매크로 하나로 Weight Tool과 패널을 함께 엽니다. 이 과정에서 startup 폴더에서 등록한 콜백은 절대 실행되지 않는다는 것을 프로브 스크립트로 측정했습니다." },
+    { type: "h3", text: "Biped Key Diagnose · 키가 안 들어갈 때 쓰는 진단기" },
+    { type: "p", text: "Biped 부위를 하나 선택하고 Scripting > Run Script로 파일을 실행합니다. 문서에 나온 모든 키 생성 방법을 빈 프레임에서 하나씩 시도한 뒤 실제 키 목록을 읽어 OK와 FAIL로 판정한 리포트를 스크립트 옆에 BipedKeyDiagnose_report.txt로 쓰고 Listener에도 출력합니다. 시험용 키는 기존 애니메이션 뒤의 빈 프레임에 만들었다가 지우며, 전체가 undo 한 단계라 키가 남았다는 메시지가 나오면 Ctrl+Z를 한 번 누르면 됩니다." },
 
-    { type: "h3", text: "4. BipedKeyDiagnose · '왜 키가 안 들어가지'를 측정하는 진단기" },
-    { type: "p", text: "Biped 부위 하나를 골라, 문서에 나온 모든 키 생성 방법을 각각 빈 프레임에서 시도하고, 호출 뒤에 실제 키 목록을 다시 읽어 키가 정말 생겼는지 판정한 리포트를 씁니다. BipedQuickTools의 All Key가 COM에만 키를 넣고 팔다리에는 아무 일도 하지 않았기 때문에, 어떤 호출이 이 리그에서 통하는지 추측이 아니라 측정으로 알아야 했습니다." },
-    { type: "p", text: "세 번 고쳐 썼습니다. 모든 방법을 같은 프레임에서 시험하니 첫 성공이 나머지를 실패처럼 보이게 해서 방법마다 빈 프레임을 배정했습니다. 팔다리를 컨트롤러 클래스 이름으로 골랐더니 이 리그의 팔다리는 다른 클래스라 COM만 시험되었고, 키 시간이 틱 단위인데 프레임으로 읽혀 147프레임을 검사하면서 23520프레임에 키를 넣고 있었습니다. 부위 판별을 rootNode 속성 유무로 바꾸고 모든 비교 지점에서 ticksPerFrame으로 명시 변환했습니다." },
-    { type: "code", lang: "maxscript", caption: "BipedKeyDiagnose.ms · 호출이 안 던진 것과 키가 생긴 것은 다르다", text: `-- 방법 하나를 빈 프레임에서 실행하고, 실제 키 목록으로 판정한다
-fn bqdTry label src =
-(
-    local before = bqdHasKeyAtFrame bqdNode bqdT
-    local err = "-"
-    try (execute src) catch (err = getCurrentException())
-    local after = bqdHasKeyAtFrame bqdNode bqdT
-    local worked = (after and not before)      -- 호출이 안 던진 것 != 키가 생긴 것
-    bqdSay ("    [" + (if worked then "OK  " else "FAIL") + "]  " + label)
-    worked
-)` },
-    { type: "p", text: "진단이 알려 준 위험한 사실도 있습니다. biped.deleteKeys는 deleteKey의 복수형이 아닙니다. 트랙 하나를 넘기면 그 트랙의 키를 전부 지우고 다른 부위 애니메이션까지 함께 날렸고, 인자 없이 부르면 Max가 그대로 죽었습니다. 이후 모든 도구는 일반 deleteKey만 씁니다." },
+    { type: "h3", text: "Mirror Rig Tools · 본, 스킨 웨이트, 키를 좌우로 미러" },
+    { type: "p", text: "Max가 켜지면 Mirror Rig Tools 창이 자동으로 뜹니다. 닫았으면 Custom Tools > Mirror Rig Tools 매크로로 다시 엽니다. 패널은 Mirror bones, Skin weights, Symmetry check, Mirror keys, Log 다섯 부분이고 모든 결과는 Log와 Listener에 MRT: 접두사로 남습니다." },
 
-    { type: "h3", text: "5. BipedQuickTools · Biped 전체 키 찍기 / 지우기 / COM 선택" },
-    { type: "p", text: "쿼드 메뉴 또는 단축키 팝업으로 선택이 속한 Biped의 모든 부위와 그 아래 링크된 소품·보조 본·헬퍼에 현재 프레임 키를 넣거나, 현재 프레임의 키만 지우거나, 어느 부위를 잡고 있든 COM으로 점프합니다. 핵심 설계는 성공했다고 믿지 않는 것입니다. 팔다리 키는 가장 덜 침습적인 방법부터 8단계 사다리로 시도하고 매 시도 후 키 목록을 읽어 진짜 생긴 방법만 성공으로 칩니다. 처음 성공한 방법 번호를 기억해 나머지 부위 100여 개는 바로 그 방법으로 갑니다." },
-    { type: "code", lang: "maxscript", caption: "BipedQuickTools.ms · 키 목록에 실제로 나타난 방법만 성공", text: `-- 팔다리: 기억해 둔 방법 먼저, 아니면 1..8을 차례로. 키 목록에 실제로 나타난 방법만 성공.
-if bqtLimbMethod != undefined do
-(
-    try (bqtKeyLimb n t bqtLimbMethod) catch (err = getCurrentException())
-    ok = bqtHasKeyAt n t
-)
-if not ok do
-(
-    local i = 1
-    while i <= 8 and not ok do
-    (
-        if bqtLimbMethod == undefined or i != bqtLimbMethod do
-        (
-            try (bqtKeyLimb n t i) catch (err = getCurrentException())
-            if bqtHasKeyAt n t do (ok = true; bqtLimbMethod = i)
-        )
-        i += 1
-    )
-)` },
-    { type: "p", text: "삭제 쪽에도 함정이 있었습니다. COM의 키를 지우면 Biped가 같은 프레임의 다른 부위 키도 함께 떨어뜨려서 노드별 반환값을 더하면 53개 중 8개로 크게 적게 나옵니다. 작업 전후에 이 프레임에 키가 있는 노드를 실제로 세어 차이를 보고하도록 바꿨습니다. 말단의 Nub 더미 13개는 회전 트랙이 없어 미리 걸러 가짜 실패를 없앴고, Figure 모드가 켜져 있으면 작업 전에 알리고 멈춥니다. 3ds Max 2025부터 menuMan이 사라져 쿼드는 CuiQuadMenuManager로 만들고 항목 GUID를 고정했습니다." },
+    { type: "h4", text: "Mirror bones · 본 세트 미러" },
+    { type: "p", text: "미러할 쪽 본과 헬퍼를 선택합니다. Include children이 켜져 있으면 자식도 자동으로 들어가고, IK 체인의 본을 선택하면 IK 골도 따라옵니다. Preview를 누르면 아무것도 바꾸지 않고 어떤 노드가 어떤 이름으로 어느 부모 밑에 생기고 참조가 무엇으로 바뀌는지 Log에 전부 나옵니다. WARNING을 확인한 뒤 Mirror를 누르면 실행되고 새로 만든 노드가 선택됩니다. Select last result로 다시 선택할 수 있습니다." },
+    { type: "p", text: "이름이 전부 결정합니다. Bip001 R Forearm은 Bip001 L Forearm으로, B_R_Sleeve_01은 B_L_Sleeve_01로, 끝의 _R은 _L로, 앞의 R_은 L_로 바뀝니다. 반대편 이름이 이미 있으면 만들지 않고 건너뛰고 Log에 SKIP으로 알리므로 같은 세트를 두 번 실행해도 중복이 생기지 않습니다. 미러 평면 위(x=0)의 노드는 이름에 L/R 토큰이 없으면 양쪽이 공유하고, 있으면 미러 복제됩니다. 센터 노드 이름은 의도적으로 지어 두세요." },
+    { type: "code", lang: "text", caption: "옵션과 Log 메시지", text: `Bone axis to flip        Z(기본, Biped 방식) / Y
+Mirror across world axis X(기본, YZ 평면)
 
-    { type: "h3", text: "6. MirrorRigTools · 보조 본, 스킨 웨이트, 키를 좌우로 미러" },
-    { type: "h4", text: "본 세트 미러 · 복제 후 바깥 참조만 고치기" },
-    { type: "p", text: "트위스트 본 4세트가 오른쪽에만 있었습니다. 각 세트는 본, 헬퍼, LookAt과 Orientation 컨스트레인트, HI IK 체인으로 얽혀 있어 손으로 미러하면 복제, 이름, 부모, 컨스트레인트 타깃과 업노드, IK 체인, 변환 미러를 노드마다 반복해야 했습니다. 리그를 배치로 덤프해 컨트롤러 종류부터 확인했고, Biped의 좌우 관례가 월드 YZ 평면으로 미러한 뒤 로컬 Z 행을 뒤집는 것이며 이 방식은 음수 스케일을 만들지 않는다는 것을 수식으로 검증했습니다. maxOps.cloneNodes로 세트를 통째로 복제하면 세트 안쪽 참조는 자동으로 복제본으로 옮겨진다는 것을 확인해, 처음부터 다시 만들기가 아니라 복제 후 바깥 참조만 고치는 방식으로 설계했습니다. 실행 전 Preview가 계획과 경고를 전부 보여 줍니다." },
-    { type: "code", lang: "maxscript", caption: "MirrorRigTools.ms · Biped 관례의 미러와 실행 파이프라인", text: `-- Biped 관례의 미러: 월드 평면 반사 후 로컬 한 축 반전. 음수 스케일이 생기지 않는다.
-fn mrtMirrorTM tm =
-(
-    local sv = case mrtPlaneAxis of (#x: [-1,1,1]; #y: [1,-1,1]; #z: [1,1,-1])
-    local m = tm * (scaleMatrix sv)
-    case mrtFlipAxis of
-    (
-        #x: m.row1 = -m.row1
-        #y: m.row2 = -m.row2
-        #z: m.row3 = -m.row3
-    )
-    m
-)
+SKIP ... already exists              반대편이 이미 있어 건너뜀
+No side token in '...'               이름에 L/R이 없어 접미를 붙임
+Biped is not posed symmetrically     T포즈 / figure mode에서 실행할 것
+SHARED ... / MIRRORED ...            센터 노드 처리 방식
+... keeps its initial offset         Keep Initial Offset 컨스트레인트, 오프셋은 미러되지 않음` },
 
--- 실행: 통째로 복제 -> 이름 -> 바깥 참조 재지정 -> 부모(깊이 순) -> IK 끄고 변환 넣고 켜기 -> 레이어/태그
-maxOps.cloneNodes srcs cloneType:#copy newNodes:&nn #nodialog
-for it in todo do it.clone.name = it.newName
-for it in todo do for c in (mrtConstraintsOf it.clone) do ( ... mrtResolve ... deleteTarget / appendTarget ... )
-for it in todo do it.clone.parent = mrtResolve it.src.parent res.items clones res.warnings
-for ch in chains do ch.controller.enabled = 0.0        -- HI IK의 enabled는 float (false는 예외)
-for it in todo do ( if constrained then n.pos = mw.row4 else n.transform = mw )
-for ch in chains do ch.controller.enabled = 1.0` },
-    { type: "p", text: "규칙은 실제 리그를 보며 함께 정했습니다. 반전 축 기본은 Biped 관례인 Z이고 Y는 옵션입니다. 이름이 겹치면 덮어쓰지 않고 건너뛰고 알립니다. 미러 평면 위의 노드는 이름이 결정합니다. L/R 토큰이 없으면 양쪽이 공유하고 있으면 미러 복제하며, 방향으로 자동 추정하는 안은 문제가 생기기 쉬워 제가 반려했습니다. 컨스트레인트가 회전을 잡는 노드는 위치만 넣고 회전은 컨스트레인트가 다시 계산하게 둡니다. 결과는 오른쪽 노드 22개 선택에서 14개 생성, 이미 왼쪽이 있는 9개 건너뜀, 위치 오차 0, 회전 오차 0.1도 미만, 두 번째 실행은 전부 건너뜀이었습니다." },
+    { type: "h4", text: "Skin weights · 스킨 웨이트 미러" },
+    { type: "p", text: "본을 먼저 미러한 뒤 소스 쪽 본들을 선택하고 Mirror skin weights를 누릅니다. 원본이든 방금 만든 복제본이든 상관없고, 선택한 본을 쓰는 모든 Skin 모디파이어를 자동으로 처리하므로 메시를 따로 고를 필요가 없습니다. 반대편 본이 Skin에 없으면 자동으로 추가하고, 소스 쪽 정점마다 미러 위치의 정점을 찾아 본을 L과 R로 바꾼 웨이트를 씁니다. 짝을 못 찾은 정점과 평면 위 정점은 건드리지 않고 개수만 알려 줍니다. 새 본은 현재 포즈로 바인드되므로 메시를 스킨했던 포즈(T포즈 또는 figure mode)에서 실행하세요." },
+    { type: "code", lang: "text", caption: "옵션", text: `All vertices on the source side            소스 쪽 정점 전부 미러 (기본)
+Only vertices weighted to selected bones   선택한 본에 웨이트가 있는 정점만
+Partner tolerance                          짝 찾기 거리 (기본 0.05). without a partner가 많으면 올릴 것` },
 
-    { type: "h4", text: "스킨 웨이트 미러 · addBone이 건드린 웨이트 되돌리기" },
-    { type: "p", text: "새로 만든 왼쪽 본은 어떤 스킨에도 없어서 오른쪽 정점의 웨이트를 왼쪽 정점으로 옮겨야 했습니다. 그런데 skinOps.addBone으로 본을 추가하는 순간 새 본의 엔벨로프가 건드리지 않은 정점의 웨이트를 바꿔 버리는 것을 발견했습니다. 본을 추가하기 전에 메시 전체 웨이트를 스냅샷하고 추가 후 복원한 다음, 소스 쪽 정점마다 스킨 변형 전 바인드 좌표에서 미러 위치의 정점을 찾아 본 이름을 L과 R로 바꾼 웨이트를 씁니다. 짝이 없는 정점과 평면 위 정점은 건드리지 않고 개수만 보고합니다." },
-    { type: "code", lang: "text", caption: "스킨 웨이트 미러 결과", text: `top_low     L 소매 본 4개 추가, 427 정점 미러, 짝 없음 0
-Lia_low     트위스트 본 4개 추가, 1533 정점 미러, 짝 없음 0
-skirt_low   17 미러, 273 짝 없음 → 치마 메시는 좌우 대칭이 아님 (기대된 결과)` },
+    { type: "h4", text: "Symmetry check · 좌우 대칭 검사" },
+    { type: "p", text: "검사할 노드를 선택하고 Check symmetry를 누릅니다. 아무것도 선택하지 않으면 씬에서 L/R 이름을 가진 노드 전부를 검사합니다. 반대편 존재, 클래스, 부모, 위치와 회전 오차, 본 길이와 두께, 회전 컨트롤러, 컨스트레인트 타깃·가중치·업노드, 레이어, Skin 소속을 비교하고 문제 노드는 Select problem nodes로 한 번에 선택할 수 있습니다. 현재 프레임의 포즈로 비교하므로 애니메이션 중간 프레임에서는 포즈 차이가 문제로 나올 수 있습니다. figure mode에서 확인하세요." },
 
-    { type: "h4", text: "대칭 검사 · 리깅 문제와 포즈 차이를 구분" },
-    { type: "p", text: "이름에 L/R이 있는 모든 쌍에 대해 반대편 존재, 클래스, 부모, 미러 변환, 본 크기, 회전 컨트롤러, 컨스트레인트 타깃·가중치·업노드, 레이어, Skin 소속을 비교해 문제를 목록으로 내고 문제 노드를 선택해 줍니다. 백업 리그에서 미러한 13쌍은 문제 0, 씬 전체 41쌍 중 5쌍이 문제로 나왔는데 전부 엄지와 발의 좌우 포즈 차이였습니다. 로그에 현재 프레임 포즈로 비교한다고 명시해 오해를 막았습니다." },
+    { type: "h4", text: "Mirror keys · 한쪽 키를 반대편에 미러" },
+    { type: "p", text: "Biped의 Paste Opposite를 여러 본, 여러 키에 한 번에 하는 기능입니다. 한쪽 본을 선택하고 모드를 고른 뒤 Mirror keys to other side를 누릅니다. Biped는 키가 팔·다리 체인 단위로 저장되므로 쇄골부터 손까지 팔 전체, 또는 다리 전체를 선택해야 깔끔하게 미러됩니다. 이름에 L/R이 없는 COM과 척추는 건너뛰고, 넣은 뒤 실제 포즈를 다시 읽어 0.5도 이상 어긋난 본에는 WARNING을 붙입니다." },
+    { type: "code", lang: "text", caption: "옵션", text: `Which keys
+  All keys of the selected bones          선택한 본의 키 전부 (기본)
+  Only keys inside the animation range    타임 슬라이더 범위 안의 키만
+  Current frame only (pose)               현재 프레임 포즈만, 키가 없어도 됨
 
-    { type: "h4", text: "키 미러 · Paste Opposite를 여러 본, 여러 키에 한 번에" },
-    { type: "p", text: "처음에는 좌우 스킨을 비교하기 위한 테스트 애니메이션 생성 기능을 만들었지만, 실제로 필요한 것은 Biped의 Paste Opposite를 여러 본과 여러 키에 한 번에 하는 것이었습니다. 테스트 애니메이션은 삭제하고 이 기능으로 교체했습니다. 한쪽 본을 선택하고 모드를 고르면 반대편 본에 미러된 키가 들어갑니다. 기본은 단순 미러이고, 옵션으로 반대편이 자기 rest 포즈를 유지한 채 움직임만 복사할 수 있습니다." },
-    { type: "code", lang: "maxscript", caption: "MirrorRigTools.ms · 움직임만 복사하는 모드의 수식", text: `-- "움직임만 복사" 모드의 수식. D = 반전 축이 -1인 대각행렬, S = 월드 반사.
--- mirror(M) = D·M·S 이고 소스 포즈를 Q·rest 로 쓰면 mirror(Q·rest) = (D·Q·D)·(D·rest·S)
--- 즉 반대편 자기 rest 위에 같은 로컬 움직임을 D로 공액한 것.
-fn mrtMirrorPose srcTM srcRest dstRest =
-(
-    local d = mrtFlipMatrix()
-    local q = srcTM * (inverse srcRest)
-    (d * q * d) * dstRest
-)` },
-    { type: "p", text: "첫 버전은 팔이 66~104도 틀어졌습니다. 진단 스크립트 다섯 개로 원인 두 개를 분리했습니다. 첫째, Biped 키는 링크 단위가 아니라 팔·다리·척추·손가락 체인 단위 한 트랙이라 노드별로 삭제와 쓰기를 반복하면 팔뚝 차례의 삭제가 방금 위팔에 넣은 키를 지웠습니다. 삭제를 전부 먼저 끝낸 뒤 키를 씁니다. 둘째, biped.setTransform은 at time만으로는 Biped 내부 캐시를 그 프레임으로 갱신하지 않아 stale한 위팔을 기준으로 팔꿈치를 풀었는데, 같은 at time 안에서 아무 노드의 트랜스폼이라도 한 번 읽으면 0.0001도로 정확해졌습니다. 문서에는 없는 동작입니다." },
-    { type: "code", lang: "maxscript", caption: "MirrorRigTools.ms · 쓰기 전에 한 번 읽어 Biped 내부 상태를 맞춘다", text: `-- Biped 키는 setTransform으로만 (transform 대입은 오른팔에서 1.5~2도 어긋남, 실측).
--- 쓰기 전에 같은 시각의 트랜스폼을 한 번 읽어 Biped 내부 상태를 그 프레임으로 맞춘다.
-fn mrtKeyTM n t tm =
-(
-    if mrtIsBiped n then (at time t (local cur = n.transform; biped.setTransform n #rotation tm.rotationpart true))
-    else (with animate on (at time t (n.transform = tm)))
-)` },
-    { type: "p", text: "왼팔 4링크를 오른팔로 미러한 결과 키 5프레임 × 4링크 20개가 모든 키 프레임에서 오차 0.000도였고, 범위 밖의 오른팔 키는 그대로 남았습니다. 키를 넣은 뒤 실제 포즈를 다시 읽어 0.5도 이상 어긋난 본에는 경고를 붙입니다." },
+Replace the other side's keys in that span   복사 범위 안의 반대편 키를 지우고 넣음 (기본 켜짐)
+Copy the motion only                         반대편은 자기 rest 포즈를 유지하고 움직임만 따라 함 (기본 꺼짐)` },
 
-    { type: "h3", text: "7. 헤드리스 자동 테스트 · 241개 검사" },
-    { type: "p", text: "3dsmaxbatch 한 줄로 백업 리그를 로드하고, 오른쪽 노드 22개를 미러하고, 스킨 웨이트를 옮기고, 대칭 검사를 돌리고, 왼팔 키를 오른팔에 미러한 뒤 241개 항목을 PASS와 FAIL로 리포트 파일에 씁니다. 소스 노드 불변, 복제본의 이름·부모·위치·회전, 컨스트레인트와 IK 조인트, 두 번째 실행 시 전부 건너뜀, 스킨 웨이트 기대값 일치, 대칭 검사가 고의로 틀어 놓은 쌍을 잡아내는지, 키 미러 후 매 키 프레임의 회전 오차와 범위 밖 키 보존까지 검사합니다." },
-    { type: "p", text: "테스트는 항상 백업 리그를 로드하고 절대 저장하지 않습니다. 작업 파일에 대고 스파이크를 돌린 뒤 제가 요청한 규칙입니다. 3dsmaxbatch는 startup 폴더를 먼저 전부 실행하므로 고친 파일을 먼저 복사하지 않으면 수정이 반영되지 않은 것처럼 보이고, 괄호 블록 안에서 선언 없이 쓴 이름은 암묵적 로컬이라 도구 함수를 global로 먼저 선언해야 한다는 것도 이때 배웠습니다." },
-    { type: "code", lang: "text", caption: "MirrorRigTools_test_report.txt · 마지막 실행 결과", text: `PASS mirror keys: Bip001 R UpperArm is the mirror of Bip001 L UpperArm at every key (max 0.000 deg)
-PASS mirror keys: Bip001 R Forearm is the mirror of Bip001 L Forearm at every key (max 0.000 deg)
-PASS mirror keys: R arm keys outside the span untouched (#(120, 125, 130))
-PASS mirror keys: current-frame pose B_L_Sleeve_01 -> B_R_Sleeve_01 (err 0.000 deg)
-...
-RESULT: 0 failure(s)` },
+    { type: "h3", text: "자동 테스트" },
+    { type: "code", lang: "text", caption: "3dsmaxbatch로 백업 리그에서 241개 항목 검사", text: `"C:\\Program Files\\Autodesk\\3ds Max 2026\\3dsmaxbatch.exe" MirrorRigTools_test.ms -v 5
+
+→ Lia_rig_Backup.max를 로드하고(저장하지 않음) 본 미러, 스킨 웨이트, 대칭 검사, 키 미러를 실행
+→ 결과는 MirrorRigTools_test_report.txt 에 PASS / FAIL로 기록. 마지막 실행: 0 failure(s)` },
   ],
   "capstone-lighting": [
     { type: "p", text: "VRC에서의 최적화, 라이팅, 머티리얼 작업, 베이킹 등의 전반적인 작업을 하였습니다." },

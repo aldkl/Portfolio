@@ -470,6 +470,10 @@ h3 {
   order: 5;
 }
 
+.home-main #ai-usage {
+  order: 6;
+}
+
 .capabilities-heading {
   display: flex;
   align-items: end;
