@@ -75,10 +75,8 @@ MANUAL_TRANSLATIONS = {
             "Personal project · 7 MaxScript tools that fill in features 3ds Max lacks or gets wrong during character rigging",
         "Biped 캐릭터 리그를 만들며 부딪힌 문제를 MaxScript 도구로 해결한 모음입니다. 이름 바꾸기와 박스 표시 단축키부터 본 축을 아는 스킨 정점 선택, Biped 전체 키 찍기, 보조 본·스킨 웨이트·키의 좌우 미러까지 7개 스크립트이고, 헤드리스 3ds Max에서 241개 자동 검사를 통과했습니다.":
             "A set of MaxScript tools written to solve problems I hit while building a Biped character rig. Seven scripts range from rename and box-display shortcuts to bone-axis-aware skin vertex selection, keying the whole Biped, and mirroring helper bones, skin weights, and keys, and they passed 241 automated checks in headless 3ds Max.",
-        "클라이언트 프로그래머":
-            "Client Programmer",
-        "포트폴리오":
-            "Portfolio",
+        "유니티 클라이언트 포트폴리오":
+            "Unity Client Portfolio",
         "AI 활용":
             "AI Usage",
         "AI 활용 방법":
@@ -237,10 +235,8 @@ MANUAL_TRANSLATIONS = {
             "7. ヘッドレス自動テスト · 241項目の検査",
         "Biped 캐릭터 리그를 만들며 부딪힌 문제를 MaxScript 도구로 해결한 모음입니다. 이름 바꾸기와 박스 표시 단축키부터 본 축을 아는 스킨 정점 선택, Biped 전체 키 찍기, 보조 본·스킨 웨이트·키의 좌우 미러까지 7개 스크립트이고, 헤드리스 3ds Max에서 241개 자동 검사를 통과했습니다.":
             "Bipedキャラクターリグを作りながらぶつかった問題をMaxScriptツールで解決した集まりです。リネームとボックス表示のショートカットから、ボーン軸を知るスキン頂点選択、Biped全キー打ち、補助ボーン・スキンウェイト・キーの左右ミラーまで7本のスクリプトで、ヘッドレス3ds Maxで241項目の自動検査に合格しました。",
-        "클라이언트 프로그래머":
-            "クライアントプログラマー",
-        "포트폴리오":
-            "ポートフォリオ",
+        "유니티 클라이언트 포트폴리오":
+            "Unityクライアントポートフォリオ",
         "AI 활용 방법":
             "AI活用方法",
         "운영 중":

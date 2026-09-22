@@ -188,6 +188,18 @@ h1 {
   display: block;
 }
 
+.hero-title__name {
+  letter-spacing: -0.015em;
+}
+
+.hero-title__role {
+  margin-top: 12px;
+  color: var(--accent-strong);
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 850;
+  line-height: 1.24;
+}
+
 h2 {
   margin-bottom: 18px;
   font-size: clamp(30px, 4vw, 48px);
